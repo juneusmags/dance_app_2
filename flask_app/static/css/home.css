@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Ubuntu Mono;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+#main_body_container {
+    border: 2px solid black;
+}
+
+#header-left {
+    text-align: center;
+}
+
+#header-middle {
+    text-align: center;
+}
+
+#main_body_container {
+    display: flex;
+    justify-content: space-between;
+}
+
+#sidebar,
+#sidebar-middle,
+#sidebar-right {
+    margin: 20px;
+    border: 2px solid black;
+    padding: 15px;
+}
+
+/* Dropdown Button */
+.dropbtn {
+    border: 2px solid black;
+    background-color: white;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    font-size: auto;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+    display: block;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: transparent;
+    cursor: pointer;
+}
+.name {
+    color: black;
+}

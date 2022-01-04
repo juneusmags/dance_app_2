@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Ubuntu Mono';
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-color: white;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.left,
+.right,
+form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.left {
+    width: 500px;
+    align-items: flex-start;
+}
+
+.left h1 {
+    font-size: 60px;
+}
+
+.left p {
+    font-size: 30px;
+    height: 200px;
+}
+
+.right {
+    width: 400px;
+}
+
+form {
+    background-color: white;
+    border-radius: 10px;
+    width: 400px;
+    display: flex;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+form input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid black;
+    outline: none;
+    font-size: 16px;
+}
+
+.sign-in-btn {
+    padding: 15px;
+    text-align: center;
+    text-decoration: none;
+    width: 100%;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 700;
+    transition: 0.5s;
+}
+
+.sign-in-btn:hover {
+    background-color: grey;
+    cursor: pointer;
+}
+
+@media (max-width: 950px) {
+    .container {
+        flex-direction: column;
+    }
+    .left {
+        width: 400px;
+        text-align: center;
+        align-content: center;
+        align-items: center;
+        margin-top: 90px;
+    }
+    .left p {
+        height: 75px;
+    }
+
+    form {
+        width: 300px;
+        height: 350px;
+    }
+    form input {
+        margin: 10px;
+    }
+    .sign-up-btn {
+        text-align: center;
+    }
+
+    .sign-up-form {
+        height: 600px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 360px) {
+    form {
+        margin-left: 20px;
+    }
+
+    .left {
+        margin-left: 20px;
+    }
+
+    .sign-up-form {
+        height: 600px;
+        margin-right: 29px;
+    }
+}
+
+@media (max-width: 320px) {
+    form {
+        margin-left: 50px;
+    }
+
+    .left {
+        margin-left: 50px;
+    }
+
+    .sign-up-form {
+        height: 600px;
+        margin-right: 55px;
+    }
+}
+
+.modal-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.modal-container.show {
+    transition: 0.5s;
+    pointer-events: auto;
+    opacity: 1;
+}
+
+.signup {
+    margin: 20px;
+}

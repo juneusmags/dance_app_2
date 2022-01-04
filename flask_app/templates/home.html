@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body>
+    <div id = "header">
+        <div id = "header-left">
+            <h3><a href = "/home"><h1>dancebook</h1></a>{time}{date}</h3>
+        </div> 
+        
+        <div id = "header-middle">
+            <h3>{upcoming events}</h3>
+            <h4>{date of event}</h4>
+            
+        </div>
+        <div id = "header-right">
+            <div class="dropdown">
+                <button class="dropbtn name"><h3>Hello {{user.first_name}}</h3></button>
+                <div class="dropdown-content">
+                  <a href="#"><h3>Edit Profile</h3></a>
+                  <a href="/logout"><h3>Logout</h3></a>
+                </div>
+              </div>
+        </div>
+    </div>
+    <!------END OF HEADER/NAVBAR-->
+
+
+    <div id = "main_body_container">
+        
+        <!----SIDEBAR-->
+        <div id = "sidebar">
+            <h1><a href = "/create/idea">Ideas</a></h1>
+            
+                
+        </div>
+
+
+        <div id = "sidebar-middle">
+            <h1>{messages}</h1>
+            <h1>{messages}</h1>
+            <h1>{messages}</h1>
+            <h1>{messages}</h1>
+            
+                
+        </div>
+
+
+        <div id = "sidebar-right">
+            
+            <h1>{friends}</h1>
+            <h1>{friends}</h1>
+            <h1>{friends}</h1>
+           
+                
+        </div>
+    </div>
+</body>
+</html>

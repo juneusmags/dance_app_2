@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/loginregister.css') }}">
+    
+    <title>Login/Register</title>
+</head>
+
+<body>
+    
+    
+    <div class = "container">
+        <div class = "left">
+            <h1>dancebook</h1>
+            <p>Create, share, collaborate.</p>
+        </div> 
+        
+        <div class = "right">
+            
+            <form action = "/login" class = "login-form" action = "/login" method = "POST">
+                    <input type="text" name = "email" placeholder = "Email">
+                    <input type="password" name = "password" placeholder = "Password">
+                    <input class = "sign-in-btn" type="submit" value = "Login">
+                    <div class = "sign-up-btn">
+                        <a href = "" class = "sign-up" id = "sign-up">Don't have an account? Sign up here!</a>
+                    </div>
+                </form>
+                
+                    <div class ="validations">
+                            {% with messages = get_flashed_messages() %}     
+                            {% if messages %}                           
+                            {% for message in messages %}            
+                            <p>{{message}}</p>                   
+                            {% endfor %}
+                            {% endif %}
+                            {% endwith %}
+                    </div>
+        </div>
+                
+        </div>
+    </div>
+
+    <div class = "modal-container" id = "modal-container">
+        <div class = "modal">
+            
+            <form action = "/register" class = "sign-up-form" method = "POST">
+                <h1 class = "signup">Sign up</h1>
+                
+                <input type="text" name = "first_name" placeholder="First name">
+                
+                <input type="text" name = "last_name" placeholder="Last name">
+                
+                <input type="text" name = "email" placeholder="Email">
+                
+                <input type="password" name = "password" placeholder="Password">
+                
+                <input type="password" name = "confirm_pass" placeholder="Confrim Password">
+                <input class = "sign-in-btn" type= "submit" value = "Register">
+                <div class = "sign-up-btn">
+                    <a href = "" class = "sign-in" id = "sign-in">Already have an account? Sign In here!</a>
+                </div>
+            </form>
+        </div>
+    </div>
+                
+<script src = "{{ url_for('static', filename='js/loginregister.js') }}"></script>  
+</body>
+</html>
