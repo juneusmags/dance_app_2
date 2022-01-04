@@ -26,3 +26,48 @@ def createidea():
     }
     Idea.create_idea(data)
     return redirect("/home")
+
+
+@app.route("/show/<int:id>")
+def show_idea(id):
+    data = {
+        "id": id,
+
+    }
+    idea = Idea.show_one_idea(data)
+    return render_template("showidea.html", idea=idea)
+
+
+@app.route("/edit/<int:id>")
+def edit_idea(id):
+    data = {
+        "id": id,
+
+    }
+    idea = Idea.edit_one_idea(data)
+    return render_template("editidea.html", idea=idea)
+
+
+@app.route("/editidea/<int:id>", methods=["POST"])
+def editidea(id):
+    if not Idea.validate_idea(request.form):
+        return redirect(f"/edit/{id}")
+
+    data = {
+        "id": id,
+        "name": request.form["name"],
+        "songs": request.form["songs"],
+        "costume": request.form["costume"],
+        "choreographers": request.form["choreographers"],
+    }
+    Idea.editidea(data)
+    return redirect(f"/show/{id}")
+
+
+@app.route("/delete/<int:id>")
+def delete_idea(id):
+    data = {
+        "id": id
+    }
+    Idea.deleteidea(data)
+    return redirect("/home")

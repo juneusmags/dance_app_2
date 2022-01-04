@@ -68,8 +68,9 @@ def dashboard():
         "id": session["user_id"]
     }
     user_in_session = User.one_user(data)
+    all_ideas = Idea.all_ideas()
 
-    return render_template("home.html", user=user_in_session)
+    return render_template("home.html", user=user_in_session, ideas=all_ideas)
 
 
 @app.route("/logout")

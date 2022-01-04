@@ -12,7 +12,7 @@ class Idea:
         self.name = data["name"]
         self.songs = data["songs"]
         self.costume = data["costume"]
-        self.choreographers = data["choreogaphers"]
+        self.choreographers = data["choreographers"]
         self.created_at = data["created_at"]
         self.updated_at = data["updated_at"]
 
@@ -37,3 +37,35 @@ class Idea:
     def create_idea(cls, data):
         query = "INSERT INTO ideas (name, songs, costume, choreographers, created_at, user_id) VALUES (%(name)s, %(songs)s, %(costume)s, %(choreographers)s, NOW(), %(user_id)s)"
         return connectToMySQL('dance_schema').query_db(query, data)
+
+    @classmethod
+    def all_ideas(cls):
+        query = "SELECT * FROM ideas JOIN users ON ideas.user_id = users.id"
+        ideas_from_db = connectToMySQL('dance_schema').query_db(query)
+        all_ideas = []
+        for idea in ideas_from_db:
+            all_ideas.append((idea))
+        return all_ideas
+
+    @classmethod
+    def show_one_idea(cls, data):
+        query = "SELECT * FROM  ideas WHERE id = %(id)s"
+        idea_from_db = connectToMySQL('dance_schema').query_db(query, data)
+        return idea_from_db[0]
+
+    @classmethod
+    def edit_one_idea(cls, data):
+        query = "SELECT * FROM  ideas WHERE id = %(id)s"
+        idea_from_db = connectToMySQL('dance_schema').query_db(query, data)
+        return idea_from_db[0]
+
+    @classmethod
+    def editidea(cls, data):
+        query = query = "UPDATE ideas SET name = %(name)s, songs = %(songs)s, costume = %(costume)s, choreographers = %(choreographers)s WHERE id = %(id)s;"
+        edited_idea = connectToMySQL('dance_schema').query_db(query, data)
+        return edited_idea
+
+    @classmethod
+    def deleteidea(cls, data):
+        query = query = "DELETE from ideas WHERE id = %(id)s;"
+        connectToMySQL('dance_schema').query_db(query, data)

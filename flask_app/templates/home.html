@@ -38,13 +38,20 @@
         <!----SIDEBAR-->
         <div id = "sidebar">
             <h1><a href = "/create/idea">Ideas</a></h1>
-            
+            {% for one_idea in ideas %}
+                <a href = "/show/{{one_idea.id}}"><h2>{{one_idea.name}}</h2></a>
+
                 
+                <p>posted by {{one_idea.first_name}}</p>
+                {% endfor %}
+                
+                
+
         </div>
 
 
         <div id = "sidebar-middle">
-            <h1>{messages}</h1>
+            <h1>{messages}{{ideas.name}}</h1>
             <h1>{messages}</h1>
             <h1>{messages}</h1>
             <h1>{messages}</h1>
