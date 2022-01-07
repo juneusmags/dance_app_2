@@ -4,30 +4,90 @@
     box-sizing: border-box;
     font-family: Ubuntu Mono;
 }
-
-#header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
+.dancebook {
+    background-color: red;
+    padding: 10px;
+    border-radius: 15px;
+    color: white;
+}
+.home-icon {
+    background-color: red;
+    text-decoration: none;
+    color: white;
 }
 
-#main_body_container {
-    border: 2px solid black;
+#header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    box-shadow: 0 5px 8px -9px rgba(0, 0, 0, 0.5);
 }
 
 #header-left {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
+.search {
+    display: flex;
+    align-items: center;
+    background-color: lightgrey;
+    padding: 10px;
+    margin-left: 10px;
+    border-radius: 999px;
+}
+
+.search input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+}
+.header-options {
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    cursor: pointer;
+}
 #header-middle {
-    text-align: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+}
+.header-options .header-icon {
+    font-size: xx-large;
+    color: grey;
 }
 
+.header-options:hover .header-icon {
+    color: red;
+}
+
+.header-options.active .header-icon {
+    color: red;
+}
 #main_body_container {
     display: flex;
     justify-content: space-between;
 }
 
+.header-options.active {
+    border-bottom: 4px solid red;
+}
+
+.header-options:hover {
+    background-color: lightgrey;
+    border-radius: 10px;
+    align-items: center;
+    padding: 0 30px;
+    border-bottom: none;
+}
+
+/*MAIN BODY CONTAINER*/
 #sidebar,
 #sidebar-middle,
 #sidebar-right {
@@ -88,4 +148,133 @@
 }
 .name {
     color: black;
+}
+
+.bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+.icon {
+    margin: 50px;
+    padding: 10px;
+    border: 3px solid black;
+}
+
+/*MAIN BODY STYLING */
+.sidebar-row {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sidebar-row:hover {
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+.sidebar-row h4 {
+    margin-left: 20px;
+    font-weight: 600px;
+}
+
+.sidebar-row i {
+    font-size: xx-large;
+    color: red;
+}
+
+/*STORY STYLING*/
+.story {
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 120px;
+    height: 200px;
+    box-sizing: 0 5px 17px -7px rgba(0, 0, 0, 0.75);
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: transform 100ms ease-in;
+}
+.storyicon {
+    margin: 10px;
+}
+
+.story:hover {
+    transform: scale(1.07);
+}
+
+.story h4 {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: white;
+}
+
+.top-ideas {
+    padding: 10px 0;
+    display: flex;
+}
+
+.main-body {
+    display: flex;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+.middle {
+    flex: 1;
+    padding: 30px 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar {
+    padding: 25px 10px;
+    flex: 0.33;
+}
+
+/*CREATE IDEA STYLING*/
+
+.createidea {
+    display: flex;
+    margin-top: 30px;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+    width: 100%;
+}
+
+.idea-top {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid white;
+    padding: 15px;
+}
+
+.idea-top form {
+    flex: 1;
+    display: flex;
+}
+
+.idea-top form input {
+    flex: 1;
+    outline-width: 0;
+    border: none;
+    padding: 15px 20px;
+    margin: 0 10px;
+    border-radius: 999px;
+    background-color: lightgrey;
+}
+
+#createidea-btn {
+    background: red;
+    color: white;
+    cursor: pointer;
 }

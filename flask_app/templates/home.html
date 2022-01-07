@@ -6,56 +6,171 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ubuntu+Mono&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6342488ad8.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Home</title>
 </head>
 <body>
+    <!----HEADER START-->
     <div id = "header">
         <div id = "header-left">
-            <h3><a href = "/home"><h1>dancebook</h1></a>{time}{date}</h3>
+            <div class = "dancebook">
+                <a href = "/home" class = "home-icon"><h1>dancebook</h1></a>
+                <h3><span class = "time"></span>  <span class = "date"></span></h3>
+            </div>
+            <div class = "search">
+                <form>
+                    <i class="fas fa-search"></i>
+                    <input type = text placeholder="Search"/>
+                    
+                </form>    
+            </div>
+                
+                
+            
         </div> 
         
         <div id = "header-middle">
-            <h3>{upcoming events}</h3>
-            <h4>{date of event}</h4>
+            <div class = "header-options active">
+                <i class="fas fa-home header-icon"></i>
+            </div>
+
+            <div class = "header-options">
+                <i class="fas fa-fire header-icon" ></i>
+            </div>
+
+            <div class = "header-options">
+                <i class="fas fa-sort-alpha-down header-icon"></i>
+            </div>
+
+            <div class = "header-options">
+                <i class="fas fa-sort-amount-up-alt header-icon" ></i>
+            </div>
+
+            <div class = "header-options" >
+                <i class="fas fa-sort-amount-down-alt header-icon"></i>
+            </div>
+            
             
         </div>
         <div id = "header-right">
             <div class="dropdown">
                 <button class="dropbtn name"><h3>Hello {{user.first_name}}</h3></button>
                 <div class="dropdown-content">
-                  <a href="#"><h3>Edit Profile</h3></a>
+                  <a href="/editprofile/{{user.id}}"><h3>Profile</h3></a>
                   <a href="/logout"><h3>Logout</h3></a>
                 </div>
               </div>
         </div>
     </div>
-    <!------END OF HEADER/NAVBAR-->
+
+<!----HEADER END-->
+
+<!--BODY START-->
+<div class = "main-body">
+    <!---SIDEBAR STARTS-->
+    <div class = "sidebar">
+        <div class = "sidebar-row">
+            <i class="fas fa-inbox"></i>
+            <h4><a href = "">All Messages</a></h4>
+        </div>
+
+        <div class = "sidebar-row">
+            <i class="fas fa-envelope"></i>
+            <h4><a href = "">Send Message</a></h4>
+        </div>
+
+
+        <div class = "sidebar-row">
+            <i class="fas fa-lightbulb" style = "font-size: 46px;"></i>
+            <h4><a href = "">All Ideas</a></h4>
+        </div>
+        
+        <div class = "sidebar-row">
+            <i class="fas fa-head-side-mask"></i>
+            <h4><a href = "">Covid Updates</a></h4>
+        </div>
+    </div>
+    <!---SIDEBAR ENDS-->
+
+    <!---IDEAS START-->
+    <div class= "middle">
+        <!--TOP IDEAS START-->
+        <div class = "top-ideas">
+            
+                <div class = "story" style = "background-image: url('/static/imgs/damn.png');">
+                    
+                    
+                </div>
+
+                <div class = "story" style = "background-image: url('/static/imgs/damn.png');">
+                    
+                    
+                </div>
+
+                <div class = "story" style = "background-image: url('/static/imgs/damn.png');">
+                    
+                    
+                </div>
+
+                <div class = "story" style = "background-image: url('/static/imgs/damn.png');">
+                    
+                    
+                </div>
+
+                <div class = "story" style = "background-image: url('/static/imgs/damn.png');">
+                    
+                    
+                </div>
+
+                <div class = "story" style = "background-image: url('/static/imgs/damn.png');">
+                    
+                    
+                </div>
+            
+        </div>
+        <!--TOP IDEAS ENDS-->
+        <!--CREATE IDEAS START-->
+        <div class = "createidea">
+            <div class = "idea-top">
+                <h1>Create Your Idea</h1>
+                <form action = "/createidea" class = "create-form" method = "POST">
+                    <input type="text" name = "name" placeholder = "Idea">
+                    <input type="text" name = "songs" placeholder = "Songs">
+                    <input type="text" name = "costume" placeholder = "Costumes">
+                    <input type="text" name = "choreographers" placeholder = "Choreographers">
+                    <input id = "createidea-btn" type="submit" value = "Add Idea">
+                </form>
+            </div>
+            
+        </div>
+        <!--CREATE IDEAS ENDS-->
+    </div>
+        <!--IDEAS POSTS START-->
+    <div class = "posts">
+
+    </div>
+    <!--IDEAS POSTS START-->
+    <!---IDEAS ENDS-->
+    
+</div>
+
+
 
 
     <div id = "main_body_container">
         
         <!----SIDEBAR-->
-        <div id = "sidebar">
-            <h1><a href = "/create/idea">Ideas</a></h1>
-            {% for one_idea in ideas %}
-                <a href = "/show/{{one_idea.id}}"><h2>{{one_idea.name}}</h2></a>
-
-                
-                <p>posted by {{one_idea.first_name}}</p>
-                {% endfor %}
-                
-                
-
-        </div>
 
 
         <div id = "sidebar-middle">
-            <h1>{messages}{{ideas.name}}</h1>
-            <h1>{messages}</h1>
-            <h1>{messages}</h1>
-            <h1>{messages}</h1>
             
+            <h1><a href = "/create/idea">Ideas</a></h1>
+            {% for one_idea in ideas %}
+                <a href = "/show/{{one_idea.id}}"><h2>{{one_idea.name}}</h2></a>
+                <p>posted by {{one_idea.first_name}}</p>
+                <p>{{one_idea.created_at}}</p>
+                {% endfor %}
                 
         </div>
 
@@ -69,5 +184,7 @@
                 
         </div>
     </div>
+
+    <script src = "{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 </html>
