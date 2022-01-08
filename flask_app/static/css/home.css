@@ -87,13 +87,8 @@
     border-bottom: none;
 }
 
-/*MAIN BODY CONTAINER*/
-#sidebar,
-#sidebar-middle,
-#sidebar-right {
-    margin: 20px;
-    border: 2px solid black;
-    padding: 15px;
+#header-right {
+    margin: 0px 0px 0px 300px;
 }
 
 /* Dropdown Button */
@@ -256,6 +251,7 @@ body {
     align-items: center;
     border-bottom: 1px solid white;
     padding: 15px;
+    text-align: center;
 }
 
 .idea-top form {
@@ -277,4 +273,57 @@ body {
     background: red;
     color: white;
     cursor: pointer;
+}
+
+/*POSTS STYLING*/
+.post {
+    width: 100%;
+    margin-top: 15px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 5px 7px -7px rgba(0, 0, 0, 0.75);
+}
+
+.post-image img {
+    width: 100%;
+}
+
+.post-top {
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 15px;
+}
+
+.post-top-info h3 {
+    padding: 15px 25px 0px;
+    font-size: x-large;
+}
+
+.post-top-info p {
+    padding: 4px 25px;
+    font-size: small;
+    color: grey;
+}
+
+.post-bottom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 15px 25px;
+}
+
+.post-options {
+    padding-top: 10px;
+    border-top: 1px solid lightgrey;
+    display: flex;
+    justify-content: space-evenly;
+    font-size: medium;
+    color: grey;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.spotify iframe {
+    position: sticky;
+    top: 0;
 }

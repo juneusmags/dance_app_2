@@ -139,28 +139,59 @@
                     <input type="text" name = "songs" placeholder = "Songs">
                     <input type="text" name = "costume" placeholder = "Costumes">
                     <input type="text" name = "choreographers" placeholder = "Choreographers">
+                    
                     <input id = "createidea-btn" type="submit" value = "Add Idea">
                 </form>
             </div>
             
         </div>
         <!--CREATE IDEAS ENDS-->
-    </div>
         <!--IDEAS POSTS START-->
-    <div class = "posts">
 
-    </div>
-    <!--IDEAS POSTS START-->
+        {% for one_idea in ideas %}
+        <div class = "post">
+            
+            <div class ="post-top-info">
+                <h3>{{one_idea.first_name}}</h3>
+                <p>{{one_idea.created_at}}</p>
+            </div>
+            <div class = "post-bottom">
+                <h3>Idea : {{one_idea.name}}</h3><p></p>
+                <h3>Songs : {{one_idea.songs}}</h3><p></p>
+                <h3>Costumes : {{one_idea.costume}}</h3><p></p>
+                <h3>Choreographers : {{one_idea.choreographers}}</h3><p></p>
+                
+            </div>
+            
+            <div class = "post-options">
+                <div class = "post-option">
+                    <i class="far fa-thumbs-up"></i>
+                    <p>Like</p>
+                    
+                </div>
+                <div class = "post-option">
+                    <i class="fas fa-comment"></i>
+                    <p>Comment</p>
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}
+    
+        </div>
     <!---IDEAS ENDS-->
+    <div class = "spotify">
+        <iframe src="https://open.spotify.com/embed/playlist/6GF7VWPvJqBzzO6mEoTpzQ?utm_source=generator&theme=0" width="100%" height="1000" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
     
 </div>
 
 
 
 
-    <div id = "main_body_container">
+    <!-- <div id = "main_body_container">
         
-        <!----SIDEBAR-->
+        
 
 
         <div id = "sidebar-middle">
@@ -183,7 +214,7 @@
            
                 
         </div>
-    </div>
+    </div> -->
 
     <script src = "{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
