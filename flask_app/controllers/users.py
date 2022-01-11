@@ -3,6 +3,7 @@ from flask import render_template, redirect, request, session, Flask
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.idea import Idea
 from flask_app.models.user import User
+from flask_app.models.like import Like
 from flask_bcrypt import Bcrypt
 from flask import flash
 
@@ -65,10 +66,27 @@ def dashboard():
         return redirect("/")
     mysql = connectToMySQL("dance_schema")
     data = {
+        "like_id": id,
+        "id": session["user_id"]
+    }
+
+    user_in_session = User.one_user(data)
+    all_ideas = Idea.all_ideas()
+
+    return render_template("home.html", user=user_in_session, ideas=all_ideas)
+
+
+@app.route("/home/alphabetic")
+def dashboard_alphabetic():
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
+    mysql = connectToMySQL("dance_schema")
+    data = {
         "id": session["user_id"]
     }
     user_in_session = User.one_user(data)
-    all_ideas = Idea.all_ideas()
+    all_ideas = Idea.all_ideas_alphabetic()
 
     return render_template("home.html", user=user_in_session, ideas=all_ideas)
 

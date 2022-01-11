@@ -12,8 +12,8 @@
 </head>
 <body>
     <!----HEADER START-->
-    <div id = "header">
-        <div id = "header-left">
+    <div class = "header">
+        <div class = "header-left">
             <div class = "dancebook">
                 <a href = "/home" class = "home-icon"><h1>dancebook</h1></a>
                 <h3><span class = "time"></span>  <span class = "date"></span></h3>
@@ -30,17 +30,17 @@
             
         </div> 
         
-        <div id = "header-middle">
+        <div class = "header-middle">
             <div class = "header-options active">
-                <i class="fas fa-home header-icon"></i>
+                <a href = "/home"><i class="fas fa-home header-icon"></i></a>
             </div>
 
             <div class = "header-options">
-                <i class="fas fa-fire header-icon" ></i>
+                <a href = ""><i class="fas fa-fire header-icon" ></i></a>
             </div>
 
             <div class = "header-options">
-                <i class="fas fa-sort-alpha-down header-icon"></i>
+                <a href = "/home/alphabetic"><i class="fas fa-sort-alpha-down header-icon"></i></a>
             </div>
 
             <div class = "header-options">
@@ -53,7 +53,7 @@
             
             
         </div>
-        <div id = "header-right">
+        <div class = "header-right">
             <div class="dropdown">
                 <button class="dropbtn name"><h3>Hello {{user.first_name}}</h3></button>
                 <div class="dropdown-content">
@@ -140,7 +140,7 @@
                     <input type="text" name = "costume" placeholder = "Costumes">
                     <input type="text" name = "choreographers" placeholder = "Choreographers">
                     
-                    <input id = "createidea-btn" type="submit" value = "Add Idea">
+                    <input class = "createidea-btn" type="submit" value = "Add Idea">
                 </form>
             </div>
             
@@ -161,18 +161,25 @@
                 <h3>Costumes : {{one_idea.costume}}</h3><p></p>
                 <h3>Choreographers : {{one_idea.choreographers}}</h3><p></p>
                 
+                
             </div>
-            
+
+            <div class = "likes">
+                <p> 1 like</p>
+            </div>
+
             <div class = "post-options">
                 <div class = "post-option">
-                    <i class="far fa-thumbs-up"></i>
-                    <p>Like</p>
-                    
+                    <form action = "/like/{{one_idea.id}}" method ="POST"> 
+                        <i class="far fa-thumbs-up"></i>
+                        <input type = "submit" value = "Like">
+                    </form>
                 </div>
                 <div class = "post-option">
                     <i class="fas fa-comment"></i>
                     <p>Comment</p>
                 </div>
+            
             </div>
             
         </div>

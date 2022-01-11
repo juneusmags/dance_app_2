@@ -71,3 +71,13 @@ def delete_idea(id):
     }
     Idea.deleteidea(data)
     return redirect("/home")
+
+
+@app.route("/like/<int:id>", methods=["POST"])
+def like_idea(id):
+    data = {
+        "id": id,
+        "user_id": session["user_id"]
+    }
+    Idea.likeidea(data)
+    return redirect("/home")

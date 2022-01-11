@@ -48,16 +48,12 @@ class Idea:
         return all_ideas
 
     @classmethod
-    def all_ideas_alphabetic(cls):
-        query = "SELECT * FROM ideas JOIN users ON ideas.user_id = users.id ORDER BY ideas.name ASC"
-        ideas_from_db = connectToMySQL('dance_schema').query_db(query)
-        all_ideas = []
-        for idea in ideas_from_db:
-            all_ideas.append((idea))
-        return all_ideas
+    def likeidea(cls, data):
+        query = "INSERT INTO likes (created_at, updated_at, idea_id, user_id) VALUES (NOW(), NOW(), %(id)s, %(user_id)s)"
+        return connectToMySQL('dance_schema').query_db(query, data)
 
     @classmethod
-    def all_ideas_likes(cls):
+    def all_ideas_alphabetic(cls):
         query = "SELECT * FROM ideas JOIN users ON ideas.user_id = users.id ORDER BY ideas.name ASC"
         ideas_from_db = connectToMySQL('dance_schema').query_db(query)
         all_ideas = []
