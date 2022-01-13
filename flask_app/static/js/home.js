@@ -30,9 +30,17 @@ const commentClose = document.querySelector(".comment-close")
 const commentBtn= document.querySelectorAll(".comment-btn")
 
 
-commentBtn.addEventListener("click", ()=>{
-    commentModalContainer.classList.add('show')
+commentBtn.forEach(modal =>{
+    modal.addEventListener("click", ()=>{
+        commentModalContainer.classList.add('show')
+    })
 })
+
+// commentBtn.addEventListener("click", ()=>{
+//     commentModalContainer.forEach(modal => {
+//         modal.classList.add('show')
+//     })
+// })
 
 commentClose.addEventListener("click",()=>{
     commentModalContainer.classList.remove('show')
