@@ -165,7 +165,7 @@
             </div>
 
             <div class = "likes">
-                <p> 1 like</p>
+                <p> like</p>
             </div>
 
             <div class = "post-options">
@@ -177,13 +177,24 @@
                 </div>
                 <div class = "post-option">
                     <i class="fas fa-comment"></i>
-                    <p>Comment</p>
+                    <button class = "comment-btn">Comment</button>
                 </div>
             
             </div>
             
         </div>
         {% endfor %}
+        
+        <div class = "comment-modal-container">
+            <div class = "modal">
+            <h1></h1>
+                <form class = "comment-form">
+                    <input class = "comment" type = "text" placeholder = "Comment..."/>
+                    <input class ="comment-close" type = "submit" value = "Add Comment"/>
+                </form>
+            </div>
+        </div>
+        
     
         </div>
     <!---IDEAS ENDS-->

@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, session, Flask
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.idea import Idea
 from flask_app.models.user import User
-from flask_app.models.like import Like
+
 from flask_bcrypt import Bcrypt
 from flask import flash
 
@@ -66,7 +66,6 @@ def dashboard():
         return redirect("/")
     mysql = connectToMySQL("dance_schema")
     data = {
-        "like_id": id,
         "id": session["user_id"]
     }
 

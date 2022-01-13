@@ -22,4 +22,18 @@ function setTime(){
 }
 
 
-setTime()
+setTime();
+
+
+const commentModalContainer = document.querySelector('.comment-modal-container')
+const commentClose = document.querySelector(".comment-close")
+const commentBtn= document.querySelectorAll(".comment-btn")
+
+
+commentBtn.addEventListener("click", ()=>{
+    commentModalContainer.classList.add('show')
+})
+
+commentClose.addEventListener("click",()=>{
+    commentModalContainer.classList.remove('show')
+})
