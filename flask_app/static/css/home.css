@@ -330,8 +330,8 @@ body {
 }
 
 .likes {
-    padding-left: 25px;
-    padding-bottom: 15px;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 @media (max-width: 768px) {
@@ -403,7 +403,7 @@ body {
 
 /*MODAL CONTAINER*/
 
-.comment-modal-container {
+/* .comment-modal-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -425,4 +425,10 @@ body {
 .comment-modal-container.show {
     opacity: 1;
     pointer-events: auto;
+} */
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 10px;
 }

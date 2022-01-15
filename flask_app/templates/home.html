@@ -162,38 +162,46 @@
                 <h3>Choreographers : {{one_idea.choreographers}}</h3><p></p>
                 
                 
+                
             </div>
-
-            <div class = "likes">
-                <p> like</p>
+            <div class = "details">
+                <h3>{number of likes}</h3>
+                <h3>{number of comments}</h3>
             </div>
+            
 
             <div class = "post-options">
                 <div class = "post-option">
-                    <form action = "/like/{{one_idea.id}}" method ="POST"> 
-                        <i class="far fa-thumbs-up"></i>
-                        <input type = "submit" value = "Like">
+                    <div class = "likes">
+                        <form action = "/like/{{one_idea.id}}" method ="POST"> 
+                            <i class="far fa-thumbs-up"></i>
+                            <input type = "submit" value = "Like">
+                         </form>
+                
+                    </div>
+                </div>
+                <div class = "post-option"> 
+                    <form class = "comment-form" action = "/comment/{{one_idea.id}}" method = "POST">
+                        <i class="fas fa-comment"></i>
+                        <input type = "text" name = "content" class = "comment"  placeholder = "Comment..." />
+                        <input class ="comment" type = "submit" value = "Add Comment"/>
                     </form>
                 </div>
-                <div class = "post-option">
-                    <i class="fas fa-comment"></i>
-                    <button class = "comment-btn">Comment</button>
-                </div>
+            </div>
+
+
             
+            <div class = "comments-bottom">
+                <h1>{{one_idea.content}} Commented by : {{one_idea.first_name}}</h1>
+                    
+                        
+                
             </div>
             
         </div>
         {% endfor %}
         
-        <div class = "comment-modal-container">
-            <div class = "modal">
-            <h1></h1>
-                <form class = "comment-form">
-                    <input class = "comment" type = "text" placeholder = "Comment..."/>
-                    <input class ="comment-close" type = "submit" value = "Add Comment"/>
-                </form>
-            </div>
-        </div>
+        
         
     
         </div>

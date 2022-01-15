@@ -81,3 +81,14 @@ def like_idea(id):
     }
     Idea.likeidea(data)
     return redirect("/home")
+
+
+@app.route("/comment/<int:id>", methods=["POST"])
+def comment_idea(id):
+    data = {
+        "id": id,
+        "user_id": session["user_id"],
+        "contents": request.form["content"]
+    }
+    Idea.commentidea(data)
+    return redirect("/home")

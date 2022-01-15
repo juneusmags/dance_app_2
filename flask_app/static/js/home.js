@@ -17,7 +17,7 @@ function setTime(){
     const minutes = time.getMinutes()
     const ampm = hours >= 12 ? 'PM' : 'AM'
 
-    timeEl.innerHTML = `${hoursFroClock}:${minutes < 10 ? `0${min}`:minutes} ${ampm}`
+    timeEl.innerHTML = `${hoursFroClock}:${minutes < 10 ? `0${minutes}`:minutes} ${ampm}`
     dateEl.innerHTML = `${days[day]} ${months[month]} ${date}`
 }
 
@@ -25,16 +25,20 @@ function setTime(){
 setTime();
 
 
-const commentModalContainer = document.querySelector('.comment-modal-container')
+const commentModalContainer = document.querySelectorAll('.comment-modal-container')
 const commentClose = document.querySelector(".comment-close")
 const commentBtn= document.querySelectorAll(".comment-btn")
 
 
-commentBtn.forEach(modal =>{
-    modal.addEventListener("click", ()=>{
-        commentModalContainer.classList.add('show')
+
+commentBtn.forEach(bttn =>{
+    bttn.addEventListener("click", ()=>{
+        commentModalContainer.forEach(modal =>{
+            modal.classList.add("show")
+        })
+        })
     })
-})
+
 
 // commentBtn.addEventListener("click", ()=>{
 //     commentModalContainer.forEach(modal => {
@@ -42,6 +46,6 @@ commentBtn.forEach(modal =>{
 //     })
 // })
 
-commentClose.addEventListener("click",()=>{
-    commentModalContainer.classList.remove('show')
-})
+// commentClose.addEventListener("click",()=>{
+//     commentModalContainer.classList.remove('show')
+// })

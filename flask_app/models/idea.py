@@ -40,7 +40,7 @@ class Idea:
 
     @classmethod
     def all_ideas(cls):
-        query = "SELECT * FROM ideas JOIN users ON ideas.user_id = users.id ORDER BY ideas.created_at DESC"
+        query = "SELECT * FROM ideas LEFT JOIN users ON ideas.user_id = users.id LEFT JOIN comments ON users.id = comments.user_id AND ideas.id = comments.idea_id;"
         ideas_from_db = connectToMySQL('dance_schema').query_db(query)
         all_ideas = []
         for idea in ideas_from_db:
@@ -50,6 +50,11 @@ class Idea:
     @classmethod
     def likeidea(cls, data):
         query = "INSERT INTO likes (created_at, updated_at, idea_id, user_id) VALUES (NOW(), NOW(), %(id)s, %(user_id)s)"
+        return connectToMySQL('dance_schema').query_db(query, data)
+
+    @classmethod
+    def commentidea(cls, data):
+        query = "INSERT INTO comments (content, created_at, updated_at, user_id, idea_id) VALUES (%(contents)s, NOW(), NOW(),%(user_id)s, %(id)s )"
         return connectToMySQL('dance_schema').query_db(query, data)
 
     @classmethod
@@ -81,5 +86,14 @@ class Idea:
 
     @classmethod
     def deleteidea(cls, data):
-        query = query = "DELETE from ideas WHERE id = %(id)s;"
+        query = "DELETE from ideas WHERE id = %(id)s;"
         connectToMySQL('dance_schema').query_db(query, data)
+
+    @classmethod
+    def all_comments(cls, data):
+        query = "SELECT * FROM ideas JOIN comments ON ideas.id = comments.idea_id WHERE ideas.id = %(id)s;"
+        comments_from_db = connectToMySQL('dance_schema').query_db(query, data)
+        all_comments = []
+        for comment in comments_from_db:
+            all_comments.append((comment))
+        return all_comments

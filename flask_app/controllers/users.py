@@ -66,13 +66,15 @@ def dashboard():
         return redirect("/")
     mysql = connectToMySQL("dance_schema")
     data = {
+
         "id": session["user_id"]
     }
 
     user_in_session = User.one_user(data)
     all_ideas = Idea.all_ideas()
+    all_comments = Idea.all_comments(data)
 
-    return render_template("home.html", user=user_in_session, ideas=all_ideas)
+    return render_template("home.html", user=user_in_session, ideas=all_ideas, comments=all_comments)
 
 
 @app.route("/home/alphabetic")
