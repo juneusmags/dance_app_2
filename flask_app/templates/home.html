@@ -189,19 +189,23 @@
                 </div>
             </div>
 
+            
 
             
             <div class = "comments-bottom">
-                <h1>{{one_idea.content}} Commented by : {{one_idea.first_name}}</h1>
+                <h1>{{one_idea.content}} Commented by : </h1>
                     
                         
                 
             </div>
             
         </div>
+        
         {% endfor %}
-        
-        
+        <h1>HELLO</h1>
+        {% for one_like in likes %}
+            <p>Testing Global Variable:{{one_like}}</p>
+        {% endfor %}
         
     
         </div>

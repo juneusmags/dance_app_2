@@ -41,11 +41,19 @@ class Idea:
     @classmethod
     def all_ideas(cls):
         query = "SELECT * FROM ideas LEFT JOIN users ON ideas.user_id = users.id LEFT JOIN comments ON users.id = comments.user_id AND ideas.id = comments.idea_id;"
+
         ideas_from_db = connectToMySQL('dance_schema').query_db(query)
+
         all_ideas = []
         for idea in ideas_from_db:
             all_ideas.append((idea))
-        return all_ideas
+        return (all_ideas)
+
+    @classmethod
+    def all_likes(cls, data):
+        query = "SELECT count(*) FROM likes JOIN ideas ON likes.idea_id = ideas.id WHERE ideas.id = %(id)s;"
+
+        return connectToMySQL('dance_schema').query_db(query, data)
 
     @classmethod
     def likeidea(cls, data):
@@ -88,12 +96,3 @@ class Idea:
     def deleteidea(cls, data):
         query = "DELETE from ideas WHERE id = %(id)s;"
         connectToMySQL('dance_schema').query_db(query, data)
-
-    @classmethod
-    def all_comments(cls, data):
-        query = "SELECT * FROM ideas JOIN comments ON ideas.id = comments.idea_id WHERE ideas.id = %(id)s;"
-        comments_from_db = connectToMySQL('dance_schema').query_db(query, data)
-        all_comments = []
-        for comment in comments_from_db:
-            all_comments.append((comment))
-        return all_comments
