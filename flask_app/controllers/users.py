@@ -72,8 +72,8 @@ def dashboard():
 
     user_in_session = User.one_user(data)
     all_ideas = Idea.all_ideas()
-    all_likes = Idea.all_likes(data)
-    return render_template("home.html", user=user_in_session, ideas=all_ideas, likes=all_likes)
+    # all_likes = Idea.all_likes(data)
+    return render_template("home.html", user=user_in_session, ideas=all_ideas)
 
 
 @app.route("/home/alphabetic")

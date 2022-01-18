@@ -165,7 +165,7 @@
                 
             </div>
             <div class = "details">
-                <h3>{number of likes}</h3>
+                <h3>likes : {{get_all_likes(one_idea.id)}}</h3>
                 <h3>{number of comments}</h3>
             </div>
             
@@ -193,19 +193,19 @@
 
             
             <div class = "comments-bottom">
-                <h1>{{one_idea.content}} Commented by : </h1>
+                <h1></h1>
                     
                         
                 
             </div>
             
         </div>
-        
+            {% for comment in get_all_comments(one_idea.id)%}
+                <p>Testing Global Variable:{{comment}} </p>
+            {% endfor %}
         {% endfor %}
         <h1>HELLO</h1>
-        {% for one_like in likes %}
-            <p>Testing Global Variable:{{one_like}}</p>
-        {% endfor %}
+        
         
     
         </div>

@@ -5,21 +5,42 @@ from flask_app.config.mysqlconnection import connectToMySQL
 app = Flask(__name__)
 app.secret_key = "12345678"
 
-global get_all_likes
-get_all_likes = 10
+
+def get_likes_count_for_idea(ideaID: int) -> int:
+
+    data = {
+        "idea_id": ideaID
+
+    }
+    query = "SELECT * FROM likes WHERE idea_id = %(idea_id)s"
+
+    result = connectToMySQL("dance_schema").query_db(
+        query, data)
+
+    likes_count = len(result)
+
+    return likes_count
 
 
-def get_likes_count_for_idea(data):
-    print(data)
-    print(type(data))
-    print(query)
-    result = connectTquery = "SELECT * FROM likes WHERE user_id = {data}"
-    oMySQL("dance_schema").query_db(query, data)
-    print(result)
-
-    likes_count = 0
-
-    return result
+app.jinja_env.globals.update(
+    get_all_likes=get_likes_count_for_idea)
 
 
-# app.jinja_env.globals.update(get_all_likes=get_likes_count_for_idea(data))
+def get_comments(ideaIDs: int) -> int:
+    data = {
+        "idea_ids": ideaIDs
+    }
+
+    query = "SELECT content FROM comments WHERE idea_id = %(idea_ids)s"
+
+    result = connectToMySQL("dance_schema").query_db(query, data)
+    all_comments = []
+    for index in range(len(result)):
+        for key in result[index]:
+            all_comments.append((result[index][key]))
+
+    return all_comments
+
+
+app.jinja_env.globals.update(
+    get_all_comments=get_comments)

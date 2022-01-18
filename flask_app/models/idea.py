@@ -40,23 +40,29 @@ class Idea:
 
     @classmethod
     def all_ideas(cls):
-        query = "SELECT * FROM ideas LEFT JOIN users ON ideas.user_id = users.id LEFT JOIN comments ON users.id = comments.user_id AND ideas.id = comments.idea_id;"
+        query = "SELECT * FROM ideas LEFT JOIN users ON ideas.user_id = users.id;"
 
         ideas_from_db = connectToMySQL('dance_schema').query_db(query)
 
         all_ideas = []
         for idea in ideas_from_db:
             all_ideas.append((idea))
+            print(all_ideas)
         return (all_ideas)
 
-    @classmethod
-    def all_likes(cls, data):
-        query = "SELECT count(*) FROM likes JOIN ideas ON likes.idea_id = ideas.id WHERE ideas.id = %(id)s;"
+    # @classmethod
+    # def all_likes(cls, data):
+    #     query = "SELECT count(*) FROM likes JOIN ideas ON likes.idea_id = ideas.id WHERE ideas.id = %(id)s;"
 
-        return connectToMySQL('dance_schema').query_db(query, data)
+    #     return connectToMySQL('dance_schema').query_db(query, data)
 
     @classmethod
     def likeidea(cls, data):
+        query_1 = "SELECT * FROM likes JOIN ideas ON likes.idea_id = ideas.id WHERE ideas.id = %(id)s AND likes.user_id = %(user_id)s; "
+        like_validation = connectToMySQL(
+            'dance_schema').query_db(query_1, data)
+        if len(like_validation) > 1:
+            return False
         query = "INSERT INTO likes (created_at, updated_at, idea_id, user_id) VALUES (NOW(), NOW(), %(id)s, %(user_id)s)"
         return connectToMySQL('dance_schema').query_db(query, data)
 
