@@ -432,3 +432,12 @@ body {
     justify-content: space-around;
     padding-bottom: 10px;
 }
+
+.comments-bottom {
+    border-top: 1px solid lightgrey;
+    padding: 20px;
+}
+
+.comments {
+    padding: 15px;
+}

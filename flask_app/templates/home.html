@@ -193,16 +193,22 @@
 
             
             <div class = "comments-bottom">
-                <h1></h1>
-                    
+                <h1>Comments : </h1>
+                <div class = "comments">
+                    {% for comment in get_all_comments(one_idea.id)%}
+                        <p>{{comment.first_name}} : {{comment.content}} {{comment.created_at}} </p>
+                        {% if comment.first_name | length == 0 %}
+                            <h3>No comments</h3>
+                        {%endif%}
+                        
+                    {% endfor %}
+                </div>
                         
                 
             </div>
             
         </div>
-            {% for comment in get_all_comments(one_idea.id)%}
-                <p>Testing Global Variable:{{comment}} </p>
-            {% endfor %}
+            
         {% endfor %}
         <h1>HELLO</h1>
         

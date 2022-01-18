@@ -31,14 +31,15 @@ def get_comments(ideaIDs: int) -> int:
         "idea_ids": ideaIDs
     }
 
-    query = "SELECT content FROM comments WHERE idea_id = %(idea_ids)s"
+    query = "SELECT content, comments.created_at, users.first_name FROM comments JOIN users ON comments.user_id = users.id WHERE comments.idea_id = %(idea_ids)s"
 
     result = connectToMySQL("dance_schema").query_db(query, data)
     all_comments = []
-    for index in range(len(result)):
-        for key in result[index]:
-            all_comments.append((result[index][key]))
-
+    # for index in range(len(result)):
+    #     for key in result[index]:
+    #         all_comments.append((result[index][key]))
+    for comment in result:
+        all_comments.append((comment))
     return all_comments
 
 
