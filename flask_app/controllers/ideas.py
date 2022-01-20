@@ -17,7 +17,7 @@ def create_idea():
 @app.route("/createidea", methods=["POST"])
 def createidea():
     if not Idea.validate_idea(request.form):
-        return redirect("/create/idea")
+        return redirect("/home")
 
     data = {
         "name": request.form["name"],

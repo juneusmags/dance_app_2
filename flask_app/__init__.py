@@ -25,6 +25,29 @@ def get_likes_count_for_idea(ideaID: int) -> int:
 app.jinja_env.globals.update(
     get_all_likes=get_likes_count_for_idea)
 
+#####################################################################
+
+
+def get_comments_count_for_idea(ideaID: int) -> int:
+
+    data = {
+        "idea_id": ideaID
+
+    }
+    query = "SELECT * FROM comments WHERE idea_id = %(idea_id)s"
+
+    result = connectToMySQL("dance_schema").query_db(
+        query, data)
+
+    comments_count = len(result)
+
+    return comments_count
+
+
+app.jinja_env.globals.update(
+    get_all_comments_count=get_comments_count_for_idea)
+####################################################################
+
 
 def get_comments(ideaIDs: int) -> int:
     data = {

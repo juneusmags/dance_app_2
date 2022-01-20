@@ -294,8 +294,13 @@ body {
     align-items: center;
     padding: 15px;
 }
+.post-top-info {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
 
-.post-top-info h3 {
+/* .post-top-info h3 {
     padding: 15px 25px 0px;
     font-size: x-large;
 }
@@ -304,7 +309,7 @@ body {
     padding: 4px 25px;
     font-size: small;
     color: grey;
-}
+} */
 
 .post-bottom {
     margin-top: 10px;
@@ -440,4 +445,21 @@ body {
 
 .comments {
     padding: 15px;
+}
+
+.validations {
+    padding: 15px;
+}
+
+.delete-idea {
+    padding: 15px;
+    color: black;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    background-color: lightgrey;
+}
+
+.delete-idea:hover {
+    background-color: darkgray;
 }

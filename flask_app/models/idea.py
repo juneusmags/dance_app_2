@@ -61,8 +61,9 @@ class Idea:
         query_1 = "SELECT * FROM likes JOIN ideas ON likes.idea_id = ideas.id WHERE ideas.id = %(id)s AND likes.user_id = %(user_id)s; "
         like_validation = connectToMySQL(
             'dance_schema').query_db(query_1, data)
-        if len(like_validation) > 1:
-            return False
+        if len(like_validation) == 1:
+            query_delete = "DELETE likes FROM likes JOIN ideas ON likes.idea_id = ideas.id WHERE ideas.id = %(id)s AND likes.user_id = %(user_id)s"
+            return connectToMySQL("dance_schema").query_db(query_delete, data)
         query = "INSERT INTO likes (created_at, updated_at, idea_id, user_id) VALUES (NOW(), NOW(), %(id)s, %(user_id)s)"
         return connectToMySQL('dance_schema').query_db(query, data)
 

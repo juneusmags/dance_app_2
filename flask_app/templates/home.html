@@ -143,6 +143,15 @@
                     <input class = "createidea-btn" type="submit" value = "Add Idea">
                 </form>
             </div>
+            <div class = "validations">
+                {% with messages = get_flashed_messages() %}     
+                    {% if messages %}                           
+                        {% for message in messages %}            
+                            <p>{{message}}</p>                   
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            </div>
             
         </div>
         <!--CREATE IDEAS ENDS-->
@@ -152,8 +161,16 @@
         <div class = "post">
             
             <div class ="post-top-info">
-                <h3>{{one_idea.first_name}}</h3>
-                <p>{{one_idea.created_at}}</p>
+                <div>
+                    <h3>{{one_idea.first_name}}</h3>
+                    <p>{{one_idea.created_at}}</p>
+                </div>
+                <div>
+                    {% if one_idea.user_id == user.id %}
+                    <a href = "/edit/{{one_idea.id}}"><button class = "delete-idea">Edit Idea</button></a>
+                        <a href = "/delete/{{one_idea.id}}"><button class = "delete-idea">Delete Idea</button></a>
+                    {%endif%}
+                </div>
             </div>
             <div class = "post-bottom">
                 <h3>Idea : {{one_idea.name}}</h3><p></p>
@@ -166,7 +183,7 @@
             </div>
             <div class = "details">
                 <h3>likes : {{get_all_likes(one_idea.id)}}</h3>
-                <h3>{number of comments}</h3>
+                <h3>{{get_all_comments_count(one_idea.id)}} comments</h3>
             </div>
             
 
@@ -193,15 +210,17 @@
 
             
             <div class = "comments-bottom">
-                <h1>Comments : </h1>
+                <h3>Comments : </h3>
                 <div class = "comments">
-                    {% for comment in get_all_comments(one_idea.id)%}
-                        <p>{{comment.first_name}} : {{comment.content}} {{comment.created_at}} </p>
-                        {% if comment.first_name | length == 0 %}
-                            <h3>No comments</h3>
-                        {%endif%}
-                        
-                    {% endfor %}
+
+                    {% if get_all_comments(one_idea.id) %}
+                        {% for comment in get_all_comments(one_idea.id)%}
+                            <p>{{comment.first_name}} : {{comment.content}} {{comment.created_at}} </p>   
+                        {% endfor %}
+                    {% else %}
+                        <p>No comments yet!</p>
+                    {% endif %}
+                    
                 </div>
                         
                 
@@ -210,7 +229,7 @@
         </div>
             
         {% endfor %}
-        <h1>HELLO</h1>
+        
         
         
     
