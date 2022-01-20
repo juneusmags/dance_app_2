@@ -1,4 +1,4 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -171,4 +171,21 @@ form input {
 
 .signup {
     margin: 20px;
+} */
+
+/*BOOTSTRAP*/
+.fs-0 {
+    font-size: 4rem;
+}
+
+.fs-7 {
+    font-size: 0.8rem;
+}
+
+@media (min-width: 62rem) {
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
 }

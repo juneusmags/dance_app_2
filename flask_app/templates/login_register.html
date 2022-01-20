@@ -6,67 +6,112 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Ubuntu+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/loginregister.css') }}">
-    
+    <!--BOOTSTRAP-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!---FONTAWESOME-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Login/Register</title>
 </head>
 
 <body>
-    
-    
-    <div class = "container">
-        <div class = "left">
-            <h1>dancebook</h1>
-            <p>Create, share, collaborate.</p>
-        </div> 
-        
-        <div class = "right">
-            
-            <form action = "/login" class = "login-form" action = "/login" method = "POST">
-                    <input type="text" name = "email" placeholder = "Email">
-                    <input type="password" name = "password" placeholder = "Password">
-                    <input class = "sign-in-btn" type="submit" value = "Login">
-                    <div class = "sign-up-btn">
-                        <a href = "" class = "sign-up" id = "sign-up">Don't have an account? Sign up here!</a>
-                    </div>
-                </form>
-                
-                    <div class ="validations">
-                            {% with messages = get_flashed_messages() %}     
-                            {% if messages %}                           
-                            {% for message in messages %}            
-                            <p>{{message}}</p>                   
-                            {% endfor %}
-                            {% endif %}
-                            {% endwith %}
-                    </div>
-        </div>
-                
-        </div>
-    </div>
+    <!---BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-    <div class = "modal-container" id = "modal-container">
-        <div class = "modal">
-            
-            <form action = "/register" class = "sign-up-form" method = "POST">
-                <h1 class = "signup">Sign up</h1>
-                
-                <input type="text" name = "first_name" placeholder="First name">
-                
-                <input type="text" name = "last_name" placeholder="Last name">
-                
-                <input type="text" name = "email" placeholder="Email">
-                
-                <input type="password" name = "password" placeholder="Password">
-                
-                <input type="password" name = "confirm_pass" placeholder="Confrim Password">
-                <input class = "sign-in-btn" type= "submit" value = "Register">
-                <div class = "sign-up-btn">
-                    <a href = "" class = "sign-in" id = "sign-in">Already have an account? Sign In here!</a>
+    <!----CONTAINER-->
+    <div class = "container d-flex flex-column flex-lg-row justify-content-evenly mt-5 pt-5">
+        <div class = "text-center text-lg-start mt-lg-5 pt-lg-5">
+            <h1 class = "text-primary fw-bold fs-0">dancebook</h1>
+            <p class = "w-75 mx-auto mx-lg-0 fs-4">Create, share, collaborate.</p>
+        </div> 
+        <!---SIGN IN FORM-->
+        <div class = "max-width : 28rem width: 100%;">
+            <div class="bgwhite shadow rounded p-3 input-group-lg">
+                <form action = "/login" method = "POST">
+                    <input type="text" name = "email" class="form-control my-3" placeholder = "Email">
+                    <input type="password" name = "password" class="form-control my-3" placeholder = "Password">
+                    <input type="submit" class="btn btn-primary w-100 my-3" value = "Login"/>
+                </form>
+                <hr>
+                <div class="text-center my-4">
+                    <button class="btn btn-success btn-lg" data-bs-toggle="modal" data-bs-target="#create-modal">Create New Account</button>
                 </div>
-            </form>
-        </div>
-    </div>
+                <!-----CREATE-MODAL-->
                 
+                
+                
+                <div class="modal fade" id="create-modal" tabindex="-1" aria-labelledby="create-modalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+                            <!--HEADER-MODAL-->
+                            <div class="modal-header">
+                                <div>
+                                    <h2 class="modal-title" id="create-modalLabel">Sign Up</h2>
+                                    <p class = "text-muted fs-7">Do it....you won't.</p>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <!---MODAL-BODY-->
+                            <div class="modal-body">
+                                
+                                <form action = "/register" method = "POST">
+                                    <div class="row">
+                                        <div class="col">
+                                            <input class = "form-control" type="text" name = "first_name" placeholder="First name">
+                                        </div>
+                                        <div class="col">
+                                            <input class = "form-control" type="text" name = "last_name" placeholder="Last name">
+                                        </div>
+                                    </div>
+                                    <input class = "form-control my-3" type="text" name = "email" placeholder="Email">
+                                    <input class = "form-control" type="password" name = "password" placeholder="Password">
+                                    <input class = "form-control my-3" type="password" name = "confirm_pass" placeholder="Confrim Password">
+                                    
+                                    <!--MODAL FOOTER-->
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        
+                                        <input class = "btn btn-primary" type= "submit" value = "Sign Up">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my-5 pb-5 text-center">
+                    <p class= "fw-bold">It's like Facebook but worse.</p>
+            </div>
+        </div>
+                
+                
+
+        </div>
+        <!---VALIDATIONS-->
+            <footer class = "bg-white p-4 text-muted">
+                <div class = "container">
+                    <div class ="d-flex flex-wrap">
+                        {% with messages = get_flashed_messages() %}     
+                                {% if messages %}                           
+                                {% for message in messages %}            
+                                <p class = "mx-2 fs-7 mb-0 text-danger">{{message}}</p>                   
+                                {% endfor %}
+                                {% endif %}
+                                {% endwith %}
+                    </div>
+                    <hr>
+                    <div class = "mt-4 mx-2">
+                        <p class = "fs-7">Dancebook &copy; 2022</p>
+                    </div>
+                </div>
+            </footer>
+
+
+    
+
+    <!----BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>               
 <script src = "{{ url_for('static', filename='js/loginregister.js') }}"></script>  
 </body>
 </html>

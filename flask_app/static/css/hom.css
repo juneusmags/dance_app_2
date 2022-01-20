@@ -1,0 +1,33 @@
+.fs-0 {
+    font-size: 4rem;
+}
+.fs-7 {
+    font-size: 0.8rem;
+}
+.bg-gray {
+    background-color: gray;
+}
+
+.nav__btn button:hover {
+    background-color: gray !important;
+}
+.nav__btn button:hover i {
+    color: blue !important;
+}
+.nav__btn-active {
+    position: relative;
+}
+
+.nav__btn-active:before {
+    content: '';
+    position: absolute;
+    bottom: -4.5px;
+    left: 0;
+    transform: translateY(4.5px);
+    width: 100%;
+    height: 3px;
+    border-bottom: 3px solid blue !important;
+}
+.nav__btn-active i {
+    color: blue !important;
+}
