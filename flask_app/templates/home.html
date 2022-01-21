@@ -324,7 +324,7 @@
                                     <div class="accordion-item border-0">
                                         <!----COLLAPSE-->
                                       <h2 class="accordion-header" id="headingOne">
-                                        <div class="accordion-button collapsed d-flex justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse" aria-expanded="true" aria-controls="commentsCollapse">
+                                        <div class="accordion-button collapsed d-flex justify-content-end" type="button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse{{one_idea.id}}" aria-expanded="true" aria-controls="commentsCollapse{{one_idea.id}}">
                                             
                                                 <p class="m-0">{{get_all_likes(one_idea.id)}} likes and {{get_all_comments_count(one_idea.id)}} comments</p>
                                                 
@@ -335,13 +335,16 @@
                                       <div class="d-flex justify-content-around">
                                           <!---LIKE-->
                                           <div class="d-flex align-items-center justify-content-center dropdown-item rounded text-muted p1" type = "button">
-                                              
-                                                 <i class="fas fa-thumbs-up me-3"></i>
-                                                 <p class = "m-0">Like</p>
+                                                <form action = "/like/{{one_idea.id}}" method="POST">
+                                                    <i class="fas fa-thumbs-up me-3"></i>
+                                                    <input type = "submit" value = "Like"style = "border: none; background: transparent; color: gray;">
+                                                </form>
+                                                
+                                                 
                                               
                                           </div>
                                           <!---COMMENT-->
-                                        <div class="d-flex align-items-center justify-content-center dropdown-item rounded text-muted p1" type = "button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse" aria-expanded="true" aria-controls="commentsCollapse">
+                                        <div class="d-flex align-items-center justify-content-center dropdown-item rounded text-muted p1" type = "button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse{{one_idea.id}}" aria-expanded="true" aria-controls="commentsCollapse{{one_idea.id}}">
                                             
                                                 <i class="fas fa-comment-alt me-3"></i>
                                                 <p class = "m-0">Comment</p>
@@ -351,7 +354,7 @@
                                           
                                           
                                       <!-----EXPAND-->
-                                      <div id="commentsCollapse" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                      <div id="commentsCollapse{{one_idea.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
                                           <!---COMMENTS-->
                                           <div class="deflex align-items-center my-1">
@@ -359,6 +362,8 @@
                                               <!---COMMENT 1 TEXT-->
                                               <div class="p-3 rounded w-100 comment__input">
                                                   <!----MENU-->
+                                                  {% if get_all_comments(one_idea.id) %}
+                                                    {% for comment in get_all_comments(one_idea.id)%}
                                                   <div class="d-flex justify-content-end">
                                                     <i class="fas fa-ellipsis-h" type = "button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                                     <ul class="dropdown-menu border-0 shadow" aria-labelled="post1Menu">
@@ -375,41 +380,24 @@
                                                     </ul>
                                                   </div>
                                                   <!----TEXT-->
-                                                    <p class="fw-bold m-0">{usercommentname}</p>
-                                                    <p class="m-0 fs-7 bg-grayp-2 rounded">{comment content}</p>
+                                                  
+                                                        <p class="fw-bold m-0">{{comment.first_name}}</p>
+                                                        <p class="m-0 fs-7 bg-grayp-2 rounded">{{comment.content}}</p>
+                                                    {% endfor %}
+                                                  {%else%}
+                                                        <p>Be the first to comment!</p>
+                                                  {%endif%}
                                               </div>
-
-                                              <!----COMMENT 2 TEXT-->
-                                              <div class="p-3 rounded w-100 comment__input">
-                                                <!----MENU-->
-                                                <div class="d-flex justify-content-end">
-                                                  <i class="fas fa-ellipsis-h" type = "button" data-bs-toggle="dropdown" aria-expanded="false"></i>
-                                                  <ul class="dropdown-menu border-0 shadow" aria-labelled="post1Menu">
-                                                      <li class = "d-flex align-items-center">
-                                                          <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
-                                                              Edit comment
-                                                          </a>
-                                                      </li>
-                                                      <li class = "d-flex align-items-center">
-                                                          <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
-                                                              Delete comment
-                                                          </a>
-                                                      </li>
-                                                  </ul>
-                                                </div>
-                                                <!----TEXT-->
-                                                  <p class="fw-bold m-0">{usercommentname}</p>
-                                                  <p class="m-0 fs-7 p-2 rounded">{comment content}</p>
-                                            </div>
                                           </div>
                                           <!----CREATE COMMENT-->
-                                          <form action="" class="de-flex my-1">
+                                          <form action="/comment/{{one_idea.id}}" method = "POST" class="de-flex my-1">
                                             <!----AVATAR-->
                                             <div>
-                                                <p>{{user.first_name}}</p>
+                                                <p>Comment on {{one_idea.first_name}}'s post</p>
                                             </div>
-                                            <input type = "text" class = "form-control rounded-pill bg-gray" placeholder="Comment">
-                                                
+                                            <form action = "/comment/{{one_idea.id}}" method = "POST">
+                                                <input type = "text" name = "content" class = "form-control rounded-pill bg-gray" placeholder="Comment">
+                                            </form>
                                               <!----INPUT-->
                                           </form>
                                         </div>

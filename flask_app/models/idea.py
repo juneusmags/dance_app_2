@@ -40,7 +40,7 @@ class Idea:
 
     @classmethod
     def all_ideas(cls):
-        query = "SELECT * FROM ideas LEFT JOIN users ON ideas.user_id = users.id;"
+        query = "SELECT * FROM ideas LEFT JOIN users ON ideas.user_id = users.id ORDER BY ideas.created_at DESC;"
 
         ideas_from_db = connectToMySQL('dance_schema').query_db(query)
 
