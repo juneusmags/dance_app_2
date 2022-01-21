@@ -31,3 +31,7 @@
 .nav__btn-active i {
     color: blue !important;
 }
+
+.story:hover {
+    opacity: 0.8;
+}
