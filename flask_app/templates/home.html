@@ -126,7 +126,7 @@
                         </li>
                         <!---->
                         <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
+                            <a href="/friends/{{user.id}}" class="text-decoration-none text-dark d-flex align-items-center">
                                 <div class = "p-2">
                                     <i class="fas fa-user-friends"></i>
                                 </div>
@@ -161,12 +161,12 @@
                         </li>
                         <!------->
                         <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
+                            <a href="/users" class="text-decoration-none text-dark d-flex align-items-center">
                                 <div class = "p-2">
                                     <i class="fas fa-user-friends"></i>
                                 </div>
                                 <div>
-                                    <p class= "m-0">Covid Updates</p>
+                                    <p class= "m-0">All Users</p>
                                 </div>
                             </a>
                         </li>
@@ -415,24 +415,28 @@
             <!---RIGHTBAR-->
             <div class="col-12 col-lg-3">
                 <div class="d-none d-xxl-block h-100 fixed-top end-0 overflow-hidden scrollbar" style= "max-width :360px; width : 100%; z-index:4; padding-top :56px; left: initial !important;">
-                    <div class = "p-3 mt-3">
-                        <!---SPOTIFY-->
-                        <iframe src="https://open.spotify.com/embed/playlist/6GF7VWPvJqBzzO6mEoTpzQ?utm_source=generator&theme=0" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+                    <div class = "p-3 mt-0">
+                        
                     </div>
-                    <hr class = "m-0">
+                    
                     <div lass = "d-flex align-items-center justify-content-between my-3">
-                        <p class = "tex-muted fs-5 m-0">Friends</p>
+                        <p class = "text-muted fs-5 m-0">Friends</p>
                     </div>
                     <div>
+                        {%for friend in friends%}
+                        <a href = "/profile/{{friend.friend_id}}" class = "text-decoration-none">
                         <li class="dropdown-item rounded my-2 px-0" type = "button">
                             <div class="d-flex align-items-center mx-2">
                                 <div class="position-relative">
                                     <i class="fas fa-user rounded-circle me-2" style = "width:38px; height: 38px; object-fit: cover;"></i>
                                    
                                 </div>
-                                <p>friend 1</p>
+                                
+                                <p>{{friend.first_name}} {{friend.last_name}}</p>
                             </div>
                         </li>
+                    </a>
+                        {%endfor%}
                     </div>
             </div>
         </div>

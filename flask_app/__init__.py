@@ -68,3 +68,23 @@ def get_comments(ideaIDs: int) -> int:
 
 app.jinja_env.globals.update(
     get_all_comments=get_comments)
+
+
+####################################################################
+
+
+def validate_friend(login_user: int, friend_user: int) -> int:
+    data = {
+        "login_user": login_user,
+        "friend_user": friend_user
+    }
+
+    query = "SELECT * FROM friends JOIN users ON friends.user_id = users.id WHERE users.id = %(login_user)s AND friends.friend_id = %(friend_user)s;"
+    result = connectToMySQL("dance_schema").query_db(query, data)
+    if len(result) == 0:
+        result = True
+    return result
+
+
+app.jinja_env.globals.update(
+    validate_friend=validate_friend)

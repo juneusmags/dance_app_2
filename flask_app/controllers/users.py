@@ -3,7 +3,7 @@ from flask import render_template, redirect, request, session, Flask
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.idea import Idea
 from flask_app.models.user import User
-from flask_app.models.like import Like
+
 
 from flask_bcrypt import Bcrypt
 from flask import flash
@@ -72,8 +72,9 @@ def dashboard():
 
     user_in_session = User.one_user(data)
     all_ideas = Idea.all_ideas()
+    all_friends = User.show_all_friends(data)
     # all_likes = Idea.all_likes(data)
-    return render_template("home.html", user=user_in_session, ideas=all_ideas)
+    return render_template("home.html", user=user_in_session, ideas=all_ideas, friends=all_friends)
 
 
 @app.route("/home/alphabetic")
@@ -95,3 +96,60 @@ def dashboard_alphabetic():
 def logout():
     session.clear()
     return redirect("/")
+
+
+@app.route("/users")
+def all_users():
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
+    data = {
+        "id": session["user_id"]
+    }
+    user_in_session = User.one_user(data)
+    all_users = User.get_all_users()
+    return render_template("all_users.html", users=all_users, user=user_in_session)
+
+
+@app.route("/friends/<int:id>")
+def all_friends(id):
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
+    data = {
+        "id": session["user_id"]
+    }
+    user_in_session = User.one_user(data)
+    all_friends = User.show_all_friends(data)
+    all_requests = User.show_all_requests(data)
+    return render_template("friends.html", friends=all_friends, user=user_in_session, all_requests=all_requests)
+
+
+@app.route("/addfriend/<int:id>")
+def add_friend(id):
+    data = {
+        "id": id,
+        "user_id": session["user_id"]
+    }
+    User.add_friend(data)
+    return redirect(f"/friends/{id}")
+
+
+@app.route("/sendrequest/<int:id>")
+def send_request(id):
+    data = {
+        "id": id,
+        "user_id": session["user_id"]
+    }
+    User.send_request(data)
+    return redirect(f"/friends/{id}")
+
+
+@app.route("/deleterequest/<int:id>")
+def delete_request(id):
+    data = {
+        "id": id,
+        "user_id": session["user_id"]
+    }
+    User.delete_request(data)
+    return redirect(f"/friends/{id}")

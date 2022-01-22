@@ -59,3 +59,63 @@ class User:
         query = "SELECT * FROM users WHERE id = %(id)s;"
         only_user = connectToMySQL("dance_schema").query_db(query, data)
         return cls(only_user[0])
+
+    @classmethod
+    def get_all_users(cls):
+        query = "SELECT * FROM users"
+        users_from_db = connectToMySQL('dance_schema').query_db(query)
+
+        all_users = []
+        for user in users_from_db:
+            all_users.append(user)
+        return(all_users)
+
+    @classmethod
+    def show_all_friends(cls, data):
+        query = "SELECT * FROM dance_schema.friends JOIN users ON friends.friend_id = users.id WHERE user_id = %(id)s;"
+
+        friends_from_db = connectToMySQL('dance_schema').query_db(query, data)
+
+        all_friends = []
+        for friend in friends_from_db:
+            all_friends.append(friend)
+        return(all_friends)
+
+    @classmethod
+    def show_all_requests(cls, data):
+        query = "SELECT * FROM friend_requests JOIN users ON friend_requests.user_id = users.id WHERE friend_requests.friend_id = %(id)s;"
+
+        friends_from_db = connectToMySQL('dance_schema').query_db(query, data)
+
+        all_friends = []
+        for friend in friends_from_db:
+            all_friends.append(friend)
+        return(all_friends)
+
+    @classmethod
+    def add_friend(cls, data):
+        query = "INSERT INTO friends (user_id, friend_id) VALUES (%(id)s, %(user_id)s);"
+        query_2 = "INSERT INTO friends (user_id, friend_id, created_at, updated_at) VALUES (%(user_id)s, %(id)s, NOW(), NOW());"
+
+        delete_request_2 = "DELETE FROM friend_requests WHERE friend_id = %(user_id)s AND user_id = %(id)s"
+        query_one = connectToMySQL('dance_schema').query_db(query, data)
+        query_two = connectToMySQL('dance_schema').query_db(query_2, data)
+
+        delete_request_two = connectToMySQL(
+            "dance_schema").query_db(delete_request_2, data)
+        return (query_one, query_two, delete_request_two)
+
+    @classmethod
+    def delete_request(cls, data):
+        delete_request_2 = "DELETE FROM friend_requests WHERE friend_id = %(user_id)s AND user_id = %(id)s"
+        delete_request_two = connectToMySQL(
+            "dance_schema").query_db(delete_request_2, data)
+        return (delete_request_two)
+
+    @classmethod
+    def send_request(cls, data):
+        query = "INSERT INTO friend_requests (user_id, friend_id, created_at, updated_at) VALUES (%(user_id)s, %(id)s, NOW(), NOW());"
+        # query_2 = "INSERT INTO friends (user_id, friend_id) VALUES (%(user_id)s, %(id)s);"
+        query_one = connectToMySQL('dance_schema').query_db(query, data)
+        # query_two = connectToMySQL('dance_schema').query_db(query_2, data)
+        return (query_one)
