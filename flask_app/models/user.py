@@ -115,7 +115,16 @@ class User:
     @classmethod
     def send_request(cls, data):
         query = "INSERT INTO friend_requests (user_id, friend_id, created_at, updated_at) VALUES (%(user_id)s, %(id)s, NOW(), NOW());"
-        # query_2 = "INSERT INTO friends (user_id, friend_id) VALUES (%(user_id)s, %(id)s);"
+
         query_one = connectToMySQL('dance_schema').query_db(query, data)
-        # query_two = connectToMySQL('dance_schema').query_db(query_2, data)
+
         return (query_one)
+
+    @classmethod
+    def send_one_user(cls, data):
+        query = "SELECT * FROM friends JOIN users ON friends.user_id = users.id WHERE user_id = %(id)s;"
+
+        only_user = connectToMySQL(
+            'dance_schema').query_db(query, data)
+
+        return cls(only_user[0])

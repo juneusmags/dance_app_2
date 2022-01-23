@@ -77,21 +77,6 @@ def dashboard():
     return render_template("home.html", user=user_in_session, ideas=all_ideas, friends=all_friends)
 
 
-@app.route("/home/alphabetic")
-def dashboard_alphabetic():
-    if "user_id" not in session:
-        flash("Please login or register before continuing on.")
-        return redirect("/")
-    mysql = connectToMySQL("dance_schema")
-    data = {
-        "id": session["user_id"]
-    }
-    user_in_session = User.one_user(data)
-    all_ideas = Idea.all_ideas_alphabetic()
-
-    return render_template("home.html", user=user_in_session, ideas=all_ideas)
-
-
 @app.route("/logout")
 def logout():
     session.clear()
@@ -153,3 +138,19 @@ def delete_request(id):
     }
     User.delete_request(data)
     return redirect(f"/friends/{id}")
+
+
+@app.route("/sendmessage/<int:id>")
+def send_message_page(id):
+    data = {
+        "id": session["user_id"]
+
+    }
+    data_two = {
+        "id": id,
+        "user_id": session["user_id"]
+    }
+    user_in_session = User.one_user(data)
+    send_one_user = User.send_one_user(data_two)
+    all_friends = User.show_all_friends(data)
+    return render_template("send_message_page.html", user=user_in_session, one_user_send=send_one_user, friends=all_friends)
