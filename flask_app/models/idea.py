@@ -73,13 +73,14 @@ class Idea:
         return connectToMySQL('dance_schema').query_db(query, data)
 
     @classmethod
-    def all_ideas_alphabetic(cls):
-        query = "SELECT * FROM ideas JOIN users ON ideas.user_id = users.id ORDER BY ideas.name ASC"
-        ideas_from_db = connectToMySQL('dance_schema').query_db(query)
-        all_ideas = []
-        for idea in ideas_from_db:
-            all_ideas.append((idea))
-        return all_ideas
+    def all_my_ideas(cls, data):
+
+        query = "SELECT * FROM dance_schema.ideas JOIN users ON ideas.user_id = users.id WHERE users.id = %(id)s;"
+        my_ideas = connectToMySQL('dance_schema').query_db(query, data)
+        all_my_ideas = []
+        for one_my_idea in my_ideas:
+            all_my_ideas.append((one_my_idea))
+        return (all_my_ideas)
 
     @classmethod
     def show_one_idea(cls, data):

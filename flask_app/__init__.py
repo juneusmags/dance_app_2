@@ -28,6 +28,28 @@ app.jinja_env.globals.update(
 #####################################################################
 
 
+def get_message_count_for_inbox(messageID: int) -> int:
+
+    data = {
+        "message_id": messageID
+
+    }
+    query = "SELECT * FROM messages WHERE message_id = %(message_id)s"
+
+    result = connectToMySQL("dance_schema").query_db(
+        query, data)
+
+    messages_count = len(result)
+
+    return messages_count
+
+
+app.jinja_env.globals.update(
+    get_all_messages=get_message_count_for_inbox)
+
+#####################################################################
+
+
 def get_comments_count_for_idea(ideaID: int) -> int:
 
     data = {

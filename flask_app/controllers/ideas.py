@@ -3,6 +3,7 @@ from flask_app import app
 from flask import render_template, redirect, request, session, Flask, flash
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask_app.models.idea import Idea
+from flask_app.models.user import User
 
 
 @app.route("/create/idea")
@@ -93,3 +94,20 @@ def comment_idea(id):
     }
     Idea.commentidea(data)
     return redirect("/home")
+
+
+@app.route("/myideas")
+def myideas():
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
+
+    data = {
+        "id": session["user_id"]
+    }
+    my_ideas_user = Idea.all_my_ideas(data)
+    user_in_session = User.one_user(data)
+
+    all_friends = User.show_all_friends(data)
+
+    return render_template("my_ideas.html", user=user_in_session, friends=all_friends, my_ideas=my_ideas_user)

@@ -177,10 +177,10 @@
                         <h4>Send Message to {{one_user_send.first_name}} {{one_user_send.last_name}}</h4>
                     </div>
                     <div class = "container-fluid mt-4">
-                        <form id = "send_message_form">
+                        <form id = "send_message_form" action = "/sendmessage/{{one_user_send.id}}" method = "POST">
                             
                             <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                                <input type = "text" name = "content" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></input>
                                 <label for="floatingTextarea2">Message</label>
                                 
                           </div>

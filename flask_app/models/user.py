@@ -122,9 +122,46 @@ class User:
 
     @classmethod
     def send_one_user(cls, data):
-        query = "SELECT * FROM friends JOIN users ON friends.user_id = users.id WHERE user_id = %(id)s;"
+        query = "SELECT users.id, users.first_name, users.last_name, users.email, users.password, users.created_at, users.updated_at FROM friends JOIN users ON friends.user_id = users.id WHERE user_id = %(id)s;"
 
         only_user = connectToMySQL(
             'dance_schema').query_db(query, data)
 
         return cls(only_user[0])
+
+    @classmethod
+    def sendmessage(cls, data):
+        query = "INSERT INTO messages (user_id, message_id, content, created_at, updated_at) VALUES (%(user_id)s, %(id)s, %(content)s, NOW(), NOW())"
+
+        message = connectToMySQL(
+            'dance_schema').query_db(query, data)
+
+        return message
+
+    @classmethod
+    def delete_message(cls, data):
+        query = "DELETE FROM dance_schema.messages WHERE id = %(id)s;"
+
+        connectToMySQL('dance_schema').query_db(query, data)
+
+    @classmethod
+    def inbox(cls, data):
+        query = "SELECT * FROM dance_schema.messages JOIN users ON user_id = users.id WHERE message_id = %(user_id)s;"
+
+        inbox_from_db = connectToMySQL('dance_schema').query_db(query, data)
+
+        all_inbox = []
+        for inbox in inbox_from_db:
+            all_inbox.append(inbox)
+
+        return(all_inbox)
+
+    @classmethod
+    def sent(cls, data):
+        query_sent = "SELECT * FROM dance_schema.messages JOIN users ON message_id = users.id WHERE user_id = %(id)s;"
+        sent_from_db = connectToMySQL(
+            'dance_schema').query_db(query_sent, data)
+        all_sent = []
+        for sent in sent_from_db:
+            all_sent.append(sent)
+        return(all_sent)

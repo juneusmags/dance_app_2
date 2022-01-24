@@ -73,7 +73,7 @@ def dashboard():
     user_in_session = User.one_user(data)
     all_ideas = Idea.all_ideas()
     all_friends = User.show_all_friends(data)
-    # all_likes = Idea.all_likes(data)
+
     return render_template("home.html", user=user_in_session, ideas=all_ideas, friends=all_friends)
 
 
@@ -140,7 +140,7 @@ def delete_request(id):
     return redirect(f"/friends/{id}")
 
 
-@app.route("/sendmessage/<int:id>")
+@app.route("/sendmessagepage/<int:id>")
 def send_message_page(id):
     data = {
         "id": session["user_id"]
@@ -154,3 +154,44 @@ def send_message_page(id):
     send_one_user = User.send_one_user(data_two)
     all_friends = User.show_all_friends(data)
     return render_template("send_message_page.html", user=user_in_session, one_user_send=send_one_user, friends=all_friends)
+
+
+@app.route("/sendmessage/<int:id>", methods=["POST"])
+def send_message(id):
+
+    data_two = {
+        "id": id,
+        "user_id": session["user_id"],
+        "content": request.form["content"]
+    }
+
+    User.sendmessage(data_two)
+
+    return redirect("/home")
+
+
+@app.route("/deletemessage/<int:id>")
+def delete_message(id):
+
+    data_two = {
+        "id": id,
+    }
+
+    User.delete_message(data_two)
+
+    return redirect("/home")
+
+
+@app.route("/inbox/<int:id>")
+def inbox(id):
+
+    data = {
+        "id": id,
+        "user_id": session["user_id"],
+
+    }
+    all_inbox = User.inbox(data)
+    all_sent = User.sent(data)
+    user_in_session = User.one_user(data)
+
+    return render_template("inbox.html", all_inbox=all_inbox, user=user_in_session, all_sent=all_sent)
