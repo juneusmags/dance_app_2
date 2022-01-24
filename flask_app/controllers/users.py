@@ -96,6 +96,21 @@ def all_users():
     return render_template("all_users.html", users=all_users, user=user_in_session)
 
 
+@app.route("/editprofile")
+def edit_profile():
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
+    data = {
+        "id": session["user_id"],
+        "first_name": request.form["first_name"],
+        "last_name": request.form["last_name"],
+        "email": request.form["email"],
+    }
+    User.edit_profile(data)
+    return redirect("/home")
+
+
 @app.route("/friends/<int:id>")
 def all_friends(id):
     if "user_id" not in session:

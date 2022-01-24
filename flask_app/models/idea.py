@@ -96,7 +96,7 @@ class Idea:
 
     @classmethod
     def editidea(cls, data):
-        query = query = "UPDATE ideas SET name = %(name)s, songs = %(songs)s, costume = %(costume)s, choreographers = %(choreographers)s WHERE id = %(id)s;"
+        query = "UPDATE ideas SET name = %(name)s, songs = %(songs)s, costume = %(costume)s, choreographers = %(choreographers)s WHERE id = %(id)s;"
         edited_idea = connectToMySQL('dance_schema').query_db(query, data)
         return edited_idea
 
