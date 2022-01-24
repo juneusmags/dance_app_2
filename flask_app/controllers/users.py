@@ -96,19 +96,33 @@ def all_users():
     return render_template("all_users.html", users=all_users, user=user_in_session)
 
 
-@app.route("/editprofile")
-def edit_profile():
+@app.route("/profile/<int:id>")
+def myprofile(id):
     if "user_id" not in session:
         flash("Please login or register before continuing on.")
         return redirect("/")
     data = {
-        "id": session["user_id"],
+        "id": id
+    }
+    user_in_session = User.myprofile(data)
+
+    print(user_in_session)
+    return render_template("profile.html",  user=user_in_session)
+
+
+@app.route("/editprofile/<int:id>", methods=["POST"])
+def edit_profile(id):
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
+    data = {
+        "id": id,
         "first_name": request.form["first_name"],
         "last_name": request.form["last_name"],
         "email": request.form["email"],
     }
     User.edit_profile(data)
-    return redirect("/home")
+    return redirect(f"/profile/{id}")
 
 
 @app.route("/friends/<int:id>")
@@ -195,6 +209,32 @@ def delete_message(id):
     User.delete_message(data_two)
 
     return redirect("/home")
+
+
+@app.route("/addbio/<int:id>", methods=["POST"])
+def add_bio(id):
+    data = {
+        "id": id,
+        "description_bio": request.form["description_bio"],
+        "pronoun": request.form["pronoun"],
+        "city": request.form["city"],
+        "social": request.form["social"],
+    }
+    User.addbio(data)
+    return redirect(f"/profile/{id}")
+
+
+@app.route("/editbio/<int:id>", methods=["POST"])
+def edit_bio(id):
+    data = {
+        "id": id,
+        "description_bio": request.form["description_bio"],
+        "pronoun": request.form["pronoun"],
+        "city": request.form["city"],
+        "social": request.form["social"],
+    }
+    User.edit_bio(data)
+    return redirect(f"/profile/{id}")
 
 
 @app.route("/inbox/<int:id>")

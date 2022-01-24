@@ -147,137 +147,179 @@
             <!---MIDDLE-->
             <div class="col-12 col-lg-6 pb-5">
                 <div class="d-flex flex-column justify-content-center w-100 mx-auto" style= "padding-top: 56px; max-width: 680px;">
-                    <!----TOPSTORIES-->
-                    <div class= "d-flex justify-content-between position-relative mt-5">
-                        <!---STORY 1-->
-
-                        <div class="mx-1 bg-secondary bg-opacity-25 rounded story" type = "button" style = "width:6em; height:190px;">
-                            <img src = "/static/imgs/damn.png" alt = "story post" class ="card-img-top" style = "min-height: 125px; object-fit:cover;"/>
-                            <div class ="d-flex align-items-center justify-content-center position-relative" style = "min-height: 65px;">
-                                <p class = "mb-0 text-center fs-7 fw-bold">Add Image</p>
-                                <div class = "position-absolute top-0 start-50 translate-middle">
-                                    <i class = "fas fa-plus-circle fs-3 text-primary bg-white p-1 rounded-circle"></i>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!---STORY 2-->
-                        <div class = "rounded mx-1 story" type = "button" style = "width: 6em; height: 190px;">
-                            <img src = "/static/imgs/damn.png" alt = "story" class = "card-img-top rounded" style = "min-height: 190px; object-fit:cover;"/>
-                        </div>
-                        <!---STORY 3-->
-                        <div class = "rounded mx-1 story" type = "button" style = "width: 6em; height: 190px;">
-                            <img src = "/static/imgs/damn.png" alt = "story" class = "card-img-top rounded" style = "min-height: 190px; object-fit:cover;"/>
-                        </div>
-                        <!---STORY 4-->
-                        <div class = "rounded mx-1 story" type = "button" style = "width: 6em; height: 190px;">
-                            <img src = "/static/imgs/damn.png" alt = "story" class = "card-img-top rounded" style = "min-height: 190px; object-fit:cover;"/>
-                        </div>
-                        <!---STORY 5-->
-                        <div class = "rounded mx-1 story d-none d-lg-block" type = "button" style = "width: 6em; height: 190px;">
-                            <img src = "/static/imgs/damn.png" alt = "story" class = "card-img-top rounded" style = "min-height: 190px; object-fit:cover;"/>
-                        </div>
-                        <!---STORY 6-->
-                        <div class = "rounded mx-1 story d-none d-lg-block" type = "button" style = "width: 6em; height: 190px;">
-                            <img src = "/static/imgs/damn.png" alt = "story" class = "card-img-top rounded" style = "min-height: 190px; object-fit:cover;"/>
-                        </div>
-                        <!-----NEXT ICON-->
-                        <div class="position-absolute top-50 start-100 translate-middle d-none d-lg-block">
-                            <i class="fas fa-arrow-right p-3 border text-muted bg-white rounded-circle"></i>
-                        </div>
-                    </div>
-                    <!---CREATE IDEA-->
-                    <div class = "bg-white p-3 mt-3 rounded border shadow">
-                        <form class = "form-container">
-                            <h4>Have an Idea?</h4>
-                            <input style = "cursor : pointer;" type = "text" class = "form-control rounded-pill border-0 bg-gray" placeholder="Create an Idea" disabled data-bs-toggle="modal" data-bs-target="#createIdeaModal"/>
-                        </form>
-                    </div>
-                    <!---CREATE MODAL-->
-                    <!-- Button trigger modal -->
+                    
 
                     
-                    <!-- Modal -->
-                    <div class="modal fade" id="createIdeaModal" tabindex="-1" aria-labelledby="createIdeaModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" >
-                        <div class="modal-content">
-                            <!---HEAD-->
-                            <div class="modal-header align-items-center">
-                            <h5 class="text-dark text-center w-100 m-0" id="createIdeaModalLabel">Create Idea</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            
-                            
-                        </div>
-                        </div>
-                    </div>
+                    
+                    
                     <!------POST IDEAS-->
-                    {% for one_inbox in all_inbox %}
-                    <div class = "bg-white p-4 rounded shadow mt-3">
+                    
+                    <div class = "bg-white p-4 rounded shadow mt-5">
                         <!---AUTHOR-->
                         <div class="d-flex justify-content-between">
                             <!---ICON-->
                             <div class = "d-flex">
                                 <i class="fas fa-user-circle rounded-circle" style = "width : 38px; height:38px; object-fit: cover; "></i>
                                 <div>
-                                    <p class = "m-0 fw-bold">{{one_inbox.first_name}}</p>
-                                    <span class = "text-muted fs-7">{{one_inbox.created_at}}</span>
+                                    <h4>{{user.first_name}} {{user.last_name}}</h4>
+                                    <p class = "m-0 mt-3 fw-bold">{{user.email}}</p>
+                                    <span class = "text-muted fs-7">Email</span>
+                                   
+                                    <p class = "m-0 mt-3 fw-bold">{{user.pronoun}}</p>
+                                    <span class = "text-muted fs-7">Pronouns</span>
+                                    <p class = "m-0 mt-3 fw-bold">{{user.description_bio}}</p>
+                                    <span class = "text-muted fs-7">Description</span>
+                                    <p class = "m-0 mt-3 fw-bold">{{user.city}}</p>
+                                    <span class = "text-muted fs-7">City</span>
+                                    <p class = "m-0 mt-3 fw-bold">{{user.social}}</p>
+                                    <span class = "text-muted fs-7">Social Media</span>
+                                    {% if user.pronoun == none and user.description_bio == none and user.city == none and user.social == none%}
+                                    <div class = "d-flex mt-3">
+                                        <p>No bio? <a href = "" class = "text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBio">Click here</a> to add one</p>
+                                    </div>
+                                    {% endif %}
                                 </div>
-                            </div>
-                            <!----EDITICON-->
-                            
-                            <i class="fas fa-ellipsis-h" type = "button" data-bs-toggle="dropdown" aria-expanded="false" id = "post1Menu"></i>
-                            
-                            <!----EDITMENU-->
-                            <ul class="dropdown-menu border-0 shadow" aria-labelled="post1Menu">
-                               
-                                <li class = "d-flex align-items-center">
-                                    <a href = "/deletemessage/{{one_inbox.id}}" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
-                                        Delete Message
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!----CONTENT-->
-                        <div class="mt-3">
-                            <!---CONTENT-->
-                            <div>
-                                <h5>Message: </h5>    <p>{{one_inbox.content}}</p>
                                 
                             </div>
-                            <!---LIKES AND COMMENTS-->
-                            <div class="postition-relative mt-3 post__comment">
-                                <!----LIKES-->
-                                    
-
-                         
-                                      <!---COMMENT & LIKES-->
-                                      <div class="d-flex justify-content-around">
-                                          <!---LIKE-->
-                                          <div class="d-flex align-items-center justify-content-center dropdown-item rounded text-muted p1" type = "button">
-                                                <form action = "/like/{{one_inbox.id}}" method="POST">
-                                                    <i class="fas fa-thumbs-up me-3"></i>
-                                                    <input type = "submit" value = "Like"style = "border: none; background: transparent; color: gray;">
-                                                </form>
-                                                
-                                                 
-                                              
-                                          </div>
-                                          <!---COMMENT-->
-                                            <div class="d-flex align-items-center justify-content-center dropdown-item rounded text-muted p1" type = "button" data-bs-toggle="collapse" data-bs-target="#commentsCollapse{{one_inbox.id}}" aria-expanded="true" aria-controls="commentsCollapse{{one_inbox.id}}">
-                                            
-                                                <i class="fas fa-comment-alt me-3"></i>
-                                                <p class = "m-0">Comment</p>
-                                            
+                            <!----EDITICON-->
+                            <div>
+                                <i class="fas fa-ellipsis-h" type = "button" data-bs-toggle="dropdown" aria-expanded="false" id = "post1Menu"></i>
+                            
+                            <!----EDITMENU-->
+                                <ul class="dropdown-menu border-0 shadow" aria-labelled="post1Menu">
+                                
+                                    <li class = "d-flex align-items-center">
+                                        <a href = "" class = "dropdown-item d-flex align-items-center justify-content-around fs-7" data-bs-toggle="modal" data-bs-target="#editProfile">
+                                            Edit Profile
+                                        </a>
+                                    </li>
+                                    {% if user.pronoun != none or user.description_bio != none or user.city != none or user.social != none%}
+                                    <li class = "d-flex align-items-center">
+                                        <a href = "" class = "dropdown-item d-flex align-items-center justify-content-around fs-7" data-bs-toggle="modal" data-bs-target="#editBio">
+                                            Edit Bio
+                                        </a>
+                                    </li>
+                                    {%endif%}
+                                </ul>
+                            </div>
+                            
+                        </div>
+                        <!----CONTENT-->
+                        <!-- Button trigger modal -->
+                        
+                        
+                        <!-- Modal EDIT PROFILE -->
+                        <div class="modal fade" id="editProfile" tabindex="-1" aria-labelledby="editProfile" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!---HEADER MODAL-->
+                                <h5 class="modal-title" id="editProfile">Edit Profile</h5>
+                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                
+                                    <form action = "/editprofile/{{user.id}}" method = "POST">
+                                        <div class="row">
+                                            <div class="col">
+                                                <input class = "form-control" type="text" name = "first_name" placeholder="First Name" value = "{{user.first_name}}">
+                                            </div>
+                                            <div class="col">
+                                                <input class = "form-control" type="text" name = "last_name" placeholder="Last Name" value = "{{user.last_name}}">
                                             </div>
                                         </div>
-                                          
-                                          
-                                     
+                                        <input class = "form-control my-3" type="text" name = "email" placeholder="Email" value = "{{user.email}}">
+                                        <!--MODAL FOOTER-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <input class = "btn btn-primary" type= "submit" value = "Update">
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Modal ADD BIO -->
+                        <div class="modal fade" id="addBio" tabindex="-1" aria-labelledby="addBio" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!---HEADER MODAL-->
+                                <h5 class="modal-title" id="addBio">Add Bio</h5>
+                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action = "/addbio/{{user.id}}" method = "POST">
+                                            <div class="col">
+                                                <input class = "form-control" type="text" name = "pronoun" placeholder="Pronouns">
+                                            </div>
+                                            <div class="col mt-3">
+                                                <input class = "form-control" type="text" name = "description_bio" placeholder="Description">
+                                            </div>
+                                            <div class="col mt-3">
+                                                <input class = "form-control" type="text" name = "city" placeholder="City">
+                                            </div>
+                                            <div class="col mt-3">
+                                                <input class = "form-control" type="text" name = "social" placeholder="Social Media">
+                                            </div>
+                                        
+                                        <!--MODAL FOOTER-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <input class = "btn btn-primary" type= "submit" value = "Add">
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                        <!-- Modal EDIT BIO -->
+                        <div class="modal fade" id="editBio" tabindex="-1" aria-labelledby="editBio" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <!---HEADER MODAL-->
+                                <h5 class="modal-title" id="editBio">Edit Bio</h5>
+                                
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action = "/editbio/{{user.id}}" method = "POST">
+                                        
+                                            <div class="col">
+                                                <h6>Pronouns</h6>
+                                                <input class = "form-control" type="text" name = "pronoun" placeholder="Pronouns" value = "{{user.pronoun}}">
+                                            </div>
+                                            <div class="col mt-3">
+                                                <h6>Description</h6>
+                                                <input class = "form-control" type="text" name = "description_bio" placeholder="Description" value = "{{user.description_bio}}">
+                                            </div>
+                                            <div class="col mt-3">
+                                                <h6>City</h6>
+                                                <input class = "form-control" type="text" name = "city" placeholder="City" value = "{{user.city}}">
+                                            </div>
+                                            <div class="col mt-3">
+                                                <h6>Social Media</h6>
+                                                <input class = "form-control" type="text" name = "social" placeholder="Social Media" value = "{{user.social}}">
+                                            </div>
+                                        
+                                        <!--MODAL FOOTER-->
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <input class = "btn btn-primary" type= "submit" value = "Update">
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
+                    
                 </div>
             </div>
 
@@ -293,7 +335,7 @@
                     </div>
                     <hr class = "mt-0">
                     <div>
-                        {%for sent in all_sent%}
+                        
                         
                         
                             <div class="d-flex align-items-center mx-2">
@@ -302,9 +344,9 @@
                                    
                                 </div>
                                 <div class = "d-flex justify-content-between">
-                                    <a href = "/profile" class = "text-decoration-none"><p>{{sent.first_name}} </a>
+                                    <a href = "/profile" class = "text-decoration-none"><p></a>
                                     
-                                    <p class = "ms-4">{{sent.content}}</p>
+                                    <p class = "ms-4"></p>
 
                                     
                                 </div>
@@ -313,7 +355,7 @@
                    
                         
                     </div>
-                    {%endfor%}
+                    
             </div>
         </div>
 

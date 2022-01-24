@@ -171,3 +171,23 @@ class User:
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
         edited_profile = connectToMySQL('dance_schema').query_db(query, data)
         return edited_profile
+
+    @classmethod
+    def myprofile(cls, data):
+        query = "SELECT * FROM users LEFT JOIN bio ON users.id = bio.user_id WHERE users.id = %(id)s;"
+        profile_from_db = connectToMySQL('dance_schema').query_db(query, data)
+
+        return profile_from_db[0]
+
+    @classmethod
+    def addbio(cls, data):
+        query = "INSERT INTO bio (description_bio, pronoun, city, social, created_at, updated_at, user_id) VALUES (%(description_bio)s, %(pronoun)s, %(city)s, %(social)s, NOW(), NOW(), %(id)s)"
+        profile_from_db = connectToMySQL('dance_schema').query_db(query, data)
+
+        return profile_from_db
+
+    @classmethod
+    def edit_bio(cls, data):
+        query = "UPDATE bio SET description_bio = %(description_bio)s, pronoun = %(pronoun)s, city = %(city)s, social = %(social)s WHERE user_id = %(id)s;"
+        edited_profile = connectToMySQL('dance_schema').query_db(query, data)
+        return edited_profile
