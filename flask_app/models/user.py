@@ -168,6 +168,7 @@ class User:
 
     @classmethod
     def edit_profile(cls, data):
+
         query = "UPDATE users SET first_name = %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
         edited_profile = connectToMySQL('dance_schema').query_db(query, data)
         return edited_profile

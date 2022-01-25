@@ -30,30 +30,10 @@ def createidea():
     return redirect("/home")
 
 
-@app.route("/show/<int:id>")
-def show_idea(id):
-    data = {
-        "id": id,
-
-    }
-    idea = Idea.show_one_idea(data)
-    return render_template("showidea.html", idea=idea)
-
-
-@app.route("/edit/<int:id>")
-def edit_idea(id):
-    data = {
-        "id": id,
-
-    }
-    idea = Idea.edit_one_idea(data)
-    return render_template("editidea.html", idea=idea)
-
-
 @app.route("/editidea/<int:id>", methods=["POST"])
 def editidea(id):
     if not Idea.validate_idea(request.form):
-        return redirect(f"/edit/{id}")
+        return redirect("/home")
 
     data = {
         "id": id,
@@ -63,7 +43,7 @@ def editidea(id):
         "choreographers": request.form["choreographers"],
     }
     Idea.editidea(data)
-    return redirect(f"/show/{id}")
+    return redirect("/myideas")
 
 
 @app.route("/delete/<int:id>")
@@ -92,7 +72,19 @@ def comment_idea(id):
         "user_id": session["user_id"],
         "contents": request.form["content"]
     }
-    Idea.commentidea(data)
+    if len(data["contents"]) == 0:
+        flash("Please enter a comment")
+    else:
+        Idea.commentidea(data)
+    return redirect("/home")
+
+
+@app.route("/deletecomment/<int:id>")
+def deletecomment(id):
+    data = {
+        "id": id
+    }
+    Idea.deletecomment(data)
     return redirect("/home")
 
 

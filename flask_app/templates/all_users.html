@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>All Users</title>
     <!---FONTAWESOME-->
     <script src="https://kit.fontawesome.com/6342488ad8.js" crossorigin="anonymous"></script>
     <!---BOOTSTRAP-->
@@ -20,54 +20,7 @@
                         <a href = "/home" class = "text-primary text-decoration-none" style = "font-size: 2rem;">dancebook</a>
                         <h6><span class = "time"></span>  <span class = "date"></span></h6>
                     </div>
-                    <div class="input-group ms-2">
-                        <!----MOBILE-->
-                        <span class="input-group-prepend d-lg-none">
-                            <div class = "input-group-text bg-gray border-0 rounded-circle" style ="min-height: 40px;">
-                                <i class="fas fa-search text-muted"></i>
-                            </div>
-                        </span>
-                        <!----DESKTOP-->
-                        <span class="input-group-prepend d-none d-lg-block">
-                            <div class = "input-group-text bg-gray border-0 rounded-pill" style ="min-height: 40px; min-width: 230px;">
-                                <i class="fas fa-search me-2 text-muted"></i>
-                                <input class = "m-0 fs-7 text-muted" style = "border:none; background-color:transparent; outline: none;" type = text placeholder="Search"/>
-                            </div>
-                        </span>
-                    </div>
-                </div>
-                <!----MIDDLE-->
-                <div class="col d-none d-lg-flex justify-content-center">
-                    <!---HOME ICON-->
-                    <div class="mx-4 nav__btn nav__btn-active">
-                        <button class="btn px-4">
-                            <a href = "/home"><i class="fas fa-home text-muted fs-4"></i></a>
-                        </button>
-                    </div>
-                    <!--FIRE ICON-->
-                    <div class="mx-4 nav__btn">
-                        <button class="btn px-4">
-                            <a href = "/home"><i class="fas fa-fire text-muted fs-4"></i></a>
-                        </button>
-                    </div>
-
-                    <div class="mx-4 nav__btn">
-                        <button class="btn px-4">
-                            <a href = "/home"><i class="fas fa-sort-alpha-down text-muted fs-4"></i></a>
-                        </button>
-                    </div>
-
-                    <div class="mx-4 nav__btn">
-                        <button class="btn px-4">
-                            <a href = "/home"><i class="fas fa-sort-amount-down-alt text-muted fs-4"></i></a>
-                        </button>
-                    </div>
-
-                    <div class="mx-4 nav__btn">
-                        <button class="btn px-4">
-                            <a href = "/home"><i class="fas fa-sort-amount-up-alt text-muted fs-4"></i></a>
-                        </button>
-                    </div>
+                    
                 </div>
                 <!---MENUS-->
                 <div class="col d-flex align-items-center justify-content-end">
@@ -81,7 +34,13 @@
                     <!---DROPDOWN-->
                         <ul class="dropdown-menu border-0 shadow p-3 overflow-auto" aria-labelledby="dropDownMenu" style= "width :23rem; max-height: 600px;">
                           <li><a class="dropdown-item" href="/profile/{{user.id}}">Profile</a></li>
-                          <li><a class="dropdown-item" href="/editprofile/{{user.id}}">Edit Profile</a></li>
+                          <div class = "d-lg-none">
+                            <li><a class="dropdown-item" href="/myideas">My Ideas</a></li>
+                            <li><a class="dropdown-item" href="/friends/{{user.id}}">Friends</a></li>
+                            <li><a class="dropdown-item" href="/inbox/{{user.id}}">Inbox</a></li>
+                            <li><a class="dropdown-item" href="/users">All Users</a></li>
+                      </div>
+                          
                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                 </div>
@@ -108,7 +67,7 @@
                         </li>
                         <!------->
                         <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
+                            <a href="/myideas" class="text-decoration-none text-dark d-flex align-items-center">
                                 <div class = "p-2">
                                     <i class="fas fa-lightbulb"></i>
                                 </div>
@@ -119,7 +78,7 @@
                         </li>
                         <!---->
                         <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
+                            <a href="/friends/{{user.id}}" class="text-decoration-none text-dark d-flex align-items-center">
                                 <div class = "p-2">
                                     <i class="fas fa-user-friends"></i>
                                 </div>
@@ -130,40 +89,29 @@
                         </li>
                         <!------->
                         <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
+                            <a href="/inbox/{{user.id}}" class="text-decoration-none text-dark d-flex align-items-center">
                                 <div class = "p-2">
                                     <i class="fas fa-inbox"></i>
                                 </div>
                                 <div>
                                     <p class= "m-0">Inbox</p>
                                     <i class="fas fa-circle text-primary" style= "font-size: 0.5rem;"></i>
-                                    <span class="fs-7 text-primary">{number of new messages}</span>
+                                    <span class="fs-7 text-primary">{{get_all_messages(user.id)}} messages</span>
                                 </div>
                             </a>
                         </li>
                         <!------->
-                        <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
-                                <div class = "p-2">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <p class= "m-0">Send Message</p>
-                                </div>
-                            </a>
-                        </li>
                         <!------->
                         <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
+                            <a href="/users" class="text-decoration-none text-dark d-flex align-items-center">
                                 <div class = "p-2">
                                     <i class="fas fa-user-friends"></i>
                                 </div>
                                 <div>
-                                    <p class= "m-0">Covid Updates</p>
+                                    <p class= "m-0">All Users</p>
                                 </div>
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
             </div>
@@ -173,7 +121,7 @@
                 <div class="d-flex flex-column justify-content-center w-100 mx-auto" style= "padding-top: 56px; max-width: 680px;">
                     
                     <!---CREATE IDEA-->
-                    <div class = "bg-white p-3 mt-3 rounded border shadow">
+                    <div class = "bg-white p-3 mt-5 rounded border shadow">
                         <h4>All Users</h4>
                     </div>
                     <!---CREATE MODAL-->
@@ -189,7 +137,7 @@
                         <div class="card-body bg-white bg-opacity-75">
                           <h5 class="card-title">{{one_user.first_name}} {{one_user.last_name}}</h5>
                           <p class="card-text">Member since {{one_user.created_at}}</p>
-                          <p class="card-text">{Description/Bio}</p>
+                          
                           {%if validate_friend(user.id, one_user.id) == true %}
                             <a href="/sendrequest/{{one_user.id}}" class="btn btn-primary">Send Friend Request</a>
                            {%else%} 
@@ -204,31 +152,12 @@
 
             <!---RIGHTBAR-->
             <div class="col-12 col-lg-3">
-                <div class="d-none d-xxl-block h-100 fixed-top end-0 overflow-hidden scrollbar" style= "max-width :360px; width : 100%; z-index:4; padding-top :56px; left: initial !important;">
-                    <div class = "p-3 mt-3">
-                        <!---SPOTIFY-->
-                        <iframe src="https://open.spotify.com/embed/playlist/6GF7VWPvJqBzzO6mEoTpzQ?utm_source=generator&theme=0" width="100%" height="100%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                    </div>
-                    <hr class = "m-0">
-                    <div lass = "d-flex align-items-center justify-content-between my-3">
-                        <p class = "tex-muted fs-5 m-0">Friends</p>
-                    </div>
-                    <div>
-                        <li class="dropdown-item rounded my-2 px-0" type = "button">
-                            <div class="d-flex align-items-center mx-2">
-                                <div class="position-relative">
-                                    <i class="fas fa-user rounded-circle me-2" style = "width:38px; height: 38px; object-fit: cover;"></i>
-                                   
-                                </div>
-                                
-                            </div>
-                        </li>
-                    </div>
-            </div>
+                
         </div>
 
     </div>
      <!----BOOTSTRAP-->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+     <script src = "{{ url_for('static', filename='js/home.js') }}"></script>
 </body>
 </html>

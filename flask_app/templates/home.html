@@ -27,21 +27,7 @@
                         <a href = "/home" class = "text-primary text-decoration-none" style = "font-size: 2rem;">dancebook</a>
                         <h6><span class = "time"></span>  <span class = "date"></span></h6>
                     </div>
-                    <div class="input-group ms-2">
-                        <!----MOBILE-->
-                        <span class="input-group-prepend d-lg-none">
-                            <div class = "input-group-text bg-gray border-0 rounded-circle" style ="min-height: 40px;">
-                                <i class="fas fa-search text-muted"></i>
-                            </div>
-                        </span>
-                        <!----DESKTOP-->
-                        <span class="input-group-prepend d-none d-lg-block">
-                            <div class = "input-group-text bg-gray border-0 rounded-pill" style ="min-height: 40px; min-width: 230px;">
-                                <i class="fas fa-search me-2 text-muted"></i>
-                                <input class = "m-0 fs-7 text-muted" style = "border:none; background-color:transparent; outline: none;" type = text placeholder="Search"/>
-                            </div>
-                        </span>
-                    </div>
+                    
                 </div>
                
                 <!---MENUS-->
@@ -55,8 +41,13 @@
                     </div>
                     <!---DROPDOWN-->
                         <ul class="dropdown-menu border-0 shadow p-3 overflow-auto" aria-labelledby="dropDownMenu" style= "width :23rem; max-height: 600px;">
-                          <li><a class="dropdown-item" href="/profile/{{user.id}}">Profile</a></li>
-                          <li><a class="dropdown-item" href="/editprofile/{{user.id}}">Edit Profile</a></li>
+                          <li><a class="dropdown-item" href="/profile/{{user.id}}">Profile</a></li> 
+                          <div class = "d-lg-none">
+                                <li><a class="dropdown-item" href="/myideas">My Ideas</a></li>
+                                <li><a class="dropdown-item" href="/friends/{{user.id}}">Friends</a></li>
+                                <li><a class="dropdown-item" href="/inbox/{{user.id}}">Inbox</a></li>
+                                <li><a class="dropdown-item" href="/users">All Users</a></li>
+                          </div>
                           <li><a class="dropdown-item" href="/logout">Logout</a></li>
                         </ul>
                 </div>
@@ -117,16 +108,6 @@
                             </a>
                         </li>
                         <!------->
-                        <li class="dropdown-item p-1 rounded">
-                            <a href="" class="text-decoration-none text-dark d-flex align-items-center">
-                                <div class = "p-2">
-                                    <i class="fas fa-envelope"></i>
-                                </div>
-                                <div>
-                                    <p class= "m-0">Send Message</p>
-                                </div>
-                            </a>
-                        </li>
                         <!------->
                         <li class="dropdown-item p-1 rounded">
                             <a href="/users" class="text-decoration-none text-dark d-flex align-items-center">
@@ -144,7 +125,9 @@
             </div>
 
             <!---MIDDLE-->
+            
             <div class="col-12 col-lg-6 pb-5">
+                
                 <div class="d-flex flex-column justify-content-center w-100 mx-auto" style= "padding-top: 56px; max-width: 680px;">
                     <!---CREATE IDEA-->
                     <div class = "bg-white p-3 mt-5 rounded border shadow">
@@ -152,11 +135,20 @@
                             <h4>Have an Idea?</h4>
                             <input style = "cursor : pointer;" type = "text" class = "form-control rounded-pill border-0 bg-gray" placeholder="Create an Idea" disabled data-bs-toggle="modal" data-bs-target="#createIdeaModal"/>
                         </form>
+                        <div class = "d-flex justify-content-evenly ms-4 text-center text-danger">
+                                    {% with messages = get_flashed_messages() %}     
+                                    {% if messages %}                           
+                                    {% for message in messages %}            
+                                    <p>{{message}}</p>                   
+                                    {% endfor %}
+                                    {% endif %}
+                                    {% endwith %}
+                        </div>
                     </div>
-                    <!---CREATE MODAL-->
-                    <!-- Button trigger modal -->
-
                     
+                    
+                    
+                    <!---CREATE MODAL-->
                     <!-- Modal -->
                     <div class="modal fade" id="createIdeaModal" tabindex="-1" aria-labelledby="createIdeaModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" >
@@ -205,7 +197,34 @@
                     </div>
                     <!------POST IDEAS-->
                     {% for one_idea in ideas %}
+                    <!-- EDIT IDEA MODAL -->
+                    <div class="modal fade" id="editIdea{{one_idea.id}}" tabindex="-1" aria-labelledby="editIdeaLabel{{one_idea.id}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editIdeaLabel{{one_idea.id}}">Edit {{one_idea.name}}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action = "/editidea/{{one_idea.id}}" method = "POST">
+                                        <input class = "form-control" type = "text" name = "name"  placeholder = "Idea" value = "{{one_idea.name}}"/>
+                                        <input class = "form-control mt-3" type="text" name = "songs" placeholder = "Songs" value = "{{one_idea.songs}}"/>
+                                        <input class = "form-control mt-3" type="text" name = "costume" placeholder = "Costumes" value = "{{one_idea.costume}}"/>
+                                        <input class = "form-control mt-3" type="text" name = "choreographers" placeholder = "Choreographers" value = "{{one_idea.choreographers}}"/>
+                                        <hr>
+                                        <!----FOOTER-->
+                                        <div class="modal-footer">
+                                            
+                                            <input type = "submit" value = "Create" class="btn btn-primary w-100"/>
+                                        </div>
+                                    
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class = "bg-white p-4 rounded shadow mt-3">
+                        
                         <!---AUTHOR-->
                         <div class="d-flex justify-content-between">
                             <!---ICON-->
@@ -223,12 +242,12 @@
                             <!----EDITMENU-->
                             <ul class="dropdown-menu border-0 shadow" aria-labelled="post1Menu">
                                 <li class = "d-flex align-items-center">
-                                    <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
+                                    <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7" data-bs-toggle="modal" data-bs-target="#editIdea{{one_idea.id}}">
                                         Edit Idea
                                     </a>
                                 </li>
                                 <li class = "d-flex align-items-center">
-                                    <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
+                                    <a href = "/delete/{{one_idea.id}}" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
                                         Delete Idea
                                     </a>
                                 </li>
@@ -243,6 +262,7 @@
                                 <h5>Costumes</h5>    <p>{{one_idea.costume}}</p>
                                 <h5>Choreographers</h5>    <p>{{one_idea.choreographers}}</p>
                             </div>
+                            
                             <!---LIKES AND COMMENTS-->
                             <div class="postition-relative mt-3 post__comment">
                                 <!----LIKES-->
@@ -266,7 +286,7 @@
                                           <div class="d-flex align-items-center justify-content-center dropdown-item rounded text-muted p1" type = "button">
                                                 <form action = "/like/{{one_idea.id}}" method="POST">
                                                     <i class="fas fa-thumbs-up me-3"></i>
-                                                    <input type = "submit" value = "Like"style = "border: none; background: transparent; color: gray;">
+                                                    <input type = "submit" value = "Like" style = "border: none; background: transparent; color: gray;">
                                                 </form>
                                                 
                                                  
@@ -293,21 +313,19 @@
                                                   <!----MENU-->
                                                   {% if get_all_comments(one_idea.id) %}
                                                     {% for comment in get_all_comments(one_idea.id)%}
+                                                        {% if comment.user_id == user.id%}
                                                   <div class="d-flex justify-content-end">
                                                     <i class="fas fa-ellipsis-h" type = "button" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                                     <ul class="dropdown-menu border-0 shadow" aria-labelled="post1Menu">
                                                         <li class = "d-flex align-items-center">
-                                                            <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
-                                                                Edit comment
-                                                            </a>
-                                                        </li>
-                                                        <li class = "d-flex align-items-center">
-                                                            <a href = "#" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
+                                                            <a href = "/deletecomment/{{comment.id}}" class = "dropdown-item d-flex align-items-center justify-content-around fs-7">
                                                                 Delete comment
                                                             </a>
                                                         </li>
+                                                        
                                                     </ul>
                                                   </div>
+                                                  {%endif%}
                                                   <!----TEXT-->
                                                   
                                                         <p class="fw-bold m-0">{{comment.first_name}}</p>
@@ -336,7 +354,9 @@
                                 <!---END OF ACCODRIAN-->
                             </div>
                         </div>
+                        
                     </div>
+                    
                     {% endfor %}
                 </div>
             </div>

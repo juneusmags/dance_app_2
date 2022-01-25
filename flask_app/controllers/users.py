@@ -115,6 +115,7 @@ def edit_profile(id):
     if "user_id" not in session:
         flash("Please login or register before continuing on.")
         return redirect("/")
+
     data = {
         "id": id,
         "first_name": request.form["first_name"],
