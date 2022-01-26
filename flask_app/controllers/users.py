@@ -112,10 +112,8 @@ def myprofile(id):
 
 @app.route("/editprofile/<int:id>", methods=["POST"])
 def edit_profile(id):
-    if "user_id" not in session:
-        flash("Please login or register before continuing on.")
-        return redirect("/")
-
+    if not User.validate_edit_profile(request.form):
+        return redirect(f"/profile/{id}")
     data = {
         "id": id,
         "first_name": request.form["first_name"],
@@ -134,6 +132,9 @@ def all_friends(id):
     data = {
         "id": session["user_id"]
     }
+    if data["id"] != id:
+        flash("That is not you!")
+        return redirect("/")
     user_in_session = User.one_user(data)
     all_friends = User.show_all_friends(data)
     all_requests = User.show_all_requests(data)
@@ -172,6 +173,9 @@ def delete_request(id):
 
 @app.route("/sendmessagepage/<int:id>")
 def send_message_page(id):
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
     data = {
         "id": session["user_id"]
 
@@ -197,7 +201,7 @@ def send_message(id):
 
     User.sendmessage(data_two)
 
-    return redirect("/home")
+    return redirect(f"/inbox/{data_two['user_id']}")
 
 
 @app.route("/deletemessage/<int:id>")
@@ -240,12 +244,17 @@ def edit_bio(id):
 
 @app.route("/inbox/<int:id>")
 def inbox(id):
-
+    if "user_id" not in session:
+        flash("Please login or register before continuing on.")
+        return redirect("/")
     data = {
         "id": id,
         "user_id": session["user_id"],
 
     }
+    if data["user_id"] != data["id"]:
+        flash("That is not you!")
+        return redirect("/")
     all_inbox = User.inbox(data)
     all_sent = User.sent(data)
     user_in_session = User.one_user(data)

@@ -40,6 +40,20 @@ class User:
             is_valid = False
         return is_valid
 
+    @staticmethod
+    def validate_edit_profile(data):
+        is_valid = True
+        if len(data["first_name"]) < 2:
+            flash("First name must be at least 2 characters long.")
+            is_valid = False
+        if len(data["last_name"]) < 2:
+            flash("Last name must be at least 2 characters long")
+            is_valid = False
+        if not EMAIL_REGEX.match(data["email"]):
+            flash("Email must be a valid email.")
+            is_valid = False
+        return is_valid
+
     @classmethod
     def register_user(cls, data):
         query = "INSERT INTO users (first_name, last_name, email, password, created_at, updated_at) VALUES (%(first_name)s, %(last_name)s, %(email)s, %(password)s, NOW(), NOW())"

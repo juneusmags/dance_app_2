@@ -6,14 +6,6 @@ from flask_app.models.idea import Idea
 from flask_app.models.user import User
 
 
-@app.route("/create/idea")
-def create_idea():
-    if "user_id" not in session:
-        flash("Please login or register before continuing on.")
-        return redirect("/")
-    return render_template("create_idea.html")
-
-
 @app.route("/createidea", methods=["POST"])
 def createidea():
     if not Idea.validate_idea(request.form):

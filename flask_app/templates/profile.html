@@ -159,6 +159,15 @@
                                         <p>No bio? <a href = "" class = "text-decoration-none" data-bs-toggle="modal" data-bs-target="#addBio">Click here</a> to add one</p>
                                     </div>
                                     {% endif %}
+                                    <div class = "d-flex flex-column align-items-center justify-content-center mt-5 ms-4 text-center text-danger">
+                                        {% with messages = get_flashed_messages() %}     
+                                        {% if messages %}                           
+                                        {% for message in messages %}            
+                                        <p>{{message}}</p>                  
+                                        {% endfor %}
+                                        {% endif %}
+                                        {% endwith %}
+                            </div>
                                 </div>
                                 
                             </div>
