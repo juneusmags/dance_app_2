@@ -25,17 +25,4 @@ function setTime(){
 setTime();
 
 
-const commentModalContainer = document.querySelectorAll('.comment-modal-container')
-const commentClose = document.querySelector(".comment-close")
-const commentBtn= document.querySelectorAll(".comment-btn")
-
-
-
-commentBtn.forEach(bttn =>{
-    bttn.addEventListener("click", ()=>{
-        commentModalContainer.forEach(modal =>{
-            modal.classList.add("show")
-        })
-        })
-    })
 
