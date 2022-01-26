@@ -121,6 +121,29 @@
                     <!---CREATE IDEA-->
                     <div class = "bg-white p-3 mt-5 rounded border shadow">
                         <h4>My friends</h4>
+                        <hr class = "d-sm-none d-xxl-block">
+                        <div class = "d-sm-block d-xxl-none mt-4">
+                            <h6 class ="mb-3">Friend Requests</h6>
+                            {%for one_request in all_requests %}
+                            <li class="dropdown-item my-2 px-0" type = "button">
+                                <div class="d-flex justify-content-between mx-2">
+                                    <div>
+                                        
+                                        <p>{{one_request.first_name}}</p>
+                                    </div>
+                                    <div class = "d-flex justify-content-between">
+                                        <div>
+                                            
+                                        </div>
+                                        <div class = "d-flex">
+                                            <a class = "text-decoration-none mx-2"href = "/addfriend/{{one_request.user_id}}"><button class = "form-control btn-success btn-sm">Accept</button></a>
+                                            <a class = "text-decoration-none" href = "/deleterequest/{{one_request.user_id}}"><button class = "form-control btn-danger btn-sm">Decline</button></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li> 
+                        {%endfor%}
+                        </div>
                     </div>
                     <!---CREATE MODAL-->
                     <!-- Button trigger modal -->
@@ -128,25 +151,25 @@
                     
                     
                     <div class = "d-flex flex-wrap justify-content-around">
-                    <!------POST IDEAS-->
-                    {% for one_friend in friends %}
-                        {%if one_friend.user_id == user.id%}
-                    <div class="card mt-3 mb-3" style="width: 18rem;">
-                        
-                        <div class="card-body bg-white bg-opacity-75">
-                          <h5 class="card-title">{{one_friend.first_name}} {{one_friend.last_name}}</h5>
-                          <p class="card-text">Member since {{one_friend.created_at}}</p>
-                          
-                          <div class = "d-flex justify-content-around">
-                            <a href="/sendmessagepage/{{one_friend.friend_id}}" class="btn btn-primary">Send Message</a>
-                            <a href="/deletefriend/{{one_friend.friend_id}}" class="btn btn-danger">Delete Friend</a>
-                        </div>
-                        </div>
+                        <!------POST IDEAS-->
+                        {% for one_friend in friends %}
+                            {%if one_friend.user_id == user.id%}
+                        <div class="card mt-3 mb-3" style="width: 18rem;">
+                            
+                            <div class="card-body bg-white bg-opacity-75">
+                            <a class = "text-decoration-none color-dark" href ="/profile/{{one_friend.friend_id}}" type = "button"><h5 class="card-title" style = "color:black;">{{one_friend.first_name}} {{one_friend.last_name}}</h5></a>
+                            <p class="card-text">Member since {{one_friend.created_at}}</p>
+                            
+                                <div class = "d-flex justify-content-around">
+                                    <a href="/sendmessagepage/{{one_friend.friend_id}}" class="btn btn-primary">Send Message</a>
+                                    <a href="/deletefriend/{{one_friend.friend_id}}" class="btn btn-danger">Delete Friend</a>
+                                </div>
+                            </div>
                       </div>
                       
                       {%endif%}
                     {% endfor %}
-                </div>
+                    </div>
                 </div>
             </div>
 

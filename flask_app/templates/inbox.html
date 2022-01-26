@@ -172,7 +172,6 @@
                                 <h5>Message: </h5>    <p>{{one_inbox.content}}</p>
                                 {%if validate_friend(user.id, one_inbox.user_id) == true%}
                                     <p class = "text-danger">You are no longer friends with this user</p>
-                                    <p>{{one_inbox.user_id}}</p>
                                 {%else%}
                                 <a class = "d-flex justify-content-end" href = "/sendmessagepage/{{one_inbox.user_id}}"><button class = "btn btn-primary">Reply</button></a>
                                 {%endif%}
