@@ -103,6 +103,7 @@ def validate_friend(login_user: int, friend_user: int) -> int:
 
     query = "SELECT * FROM friends JOIN users ON friends.user_id = users.id WHERE users.id = %(login_user)s AND friends.friend_id = %(friend_user)s;"
     result = connectToMySQL("dance_schema").query_db(query, data)
+
     if len(result) == 0:
         result = True
     return result
@@ -110,3 +111,24 @@ def validate_friend(login_user: int, friend_user: int) -> int:
 
 app.jinja_env.globals.update(
     validate_friend=validate_friend)
+
+
+####################################################################
+
+
+def validate_friend_request(login_user: int, friend_user: int) -> int:
+    data = {
+        "login_user": login_user,
+        "friend_user": friend_user
+    }
+
+    query = "SELECT * FROM friend_requests WHERE user_id = %(login_user)s AND friend_id = %(friend_user)s;"
+    result = connectToMySQL("dance_schema").query_db(query, data)
+
+    if len(result) == 0:
+        result = True
+    return result
+
+
+app.jinja_env.globals.update(
+    validate_friend_request=validate_friend_request)

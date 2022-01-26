@@ -148,7 +148,7 @@ def add_friend(id):
         "user_id": session["user_id"]
     }
     User.add_friend(data)
-    return redirect(f"/friends/{id}")
+    return redirect(f"/friends/{data['user_id']}")
 
 
 @app.route("/sendrequest/<int:id>")
@@ -158,7 +158,7 @@ def send_request(id):
         "user_id": session["user_id"]
     }
     User.send_request(data)
-    return redirect(f"/friends/{id}")
+    return redirect("/users")
 
 
 @app.route("/deleterequest/<int:id>")
@@ -168,7 +168,7 @@ def delete_request(id):
         "user_id": session["user_id"]
     }
     User.delete_request(data)
-    return redirect(f"/friends/{id}")
+    return redirect(f"/friends/{data['user_id']}")
 
 
 @app.route("/sendmessagepage/<int:id>")
@@ -214,6 +214,19 @@ def delete_message(id):
     User.delete_message(data_two)
 
     return redirect("/home")
+
+
+@app.route("/deletefriend/<int:id>")
+def delete_friend(id):
+
+    data = {
+        "id": id,
+        "user_id": session["user_id"]
+    }
+
+    User.deletefriend(data)
+
+    return redirect(f"/friends/{data['user_id']}")
 
 
 @app.route("/addbio/<int:id>", methods=["POST"])

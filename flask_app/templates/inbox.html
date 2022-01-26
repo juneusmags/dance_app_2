@@ -170,8 +170,12 @@
                             <!---CONTENT-->
                             <div>
                                 <h5>Message: </h5>    <p>{{one_inbox.content}}</p>
+                                {%if validate_friend(user.id, one_inbox.user_id) == true%}
+                                    <p class = "text-danger">You are no longer friends with this user</p>
+                                    <p>{{one_inbox.user_id}}</p>
+                                {%else%}
                                 <a class = "d-flex justify-content-end" href = "/sendmessagepage/{{one_inbox.user_id}}"><button class = "btn btn-primary">Reply</button></a>
-                                
+                                {%endif%}
                             </div>
                         </div>
                     </div>
@@ -186,11 +190,11 @@
                         
                     </div>
                     
-                    <div lass = "d-flex align-items-center justify-content-between my-3">
+                    <div class = "d-flex align-items-center justify-content-between my-3">
                         <p class = "text-muted fs-5 m-0">Messages Sent</p>
                     </div>
                     <hr class = "mt-0">
-                    <div>
+                    
                         {%for sent in all_sent%}
                         
                         
@@ -200,7 +204,7 @@
                                    
                                 </div>
                                 <div class = "d-flex justify-content-between">
-                                    <a href = "/profile" class = "text-decoration-none"><p>{{sent.first_name}} </a>
+                                    <a href = "/profile/{{sent.message_id}}" class = "text-decoration-none"><p>{{sent.first_name}} </a>
                                     
                                     <p class = "ms-4">{{sent.content}}</p>
 
@@ -210,7 +214,7 @@
                         
                    
                         
-                    </div>
+                    
                     {%endfor%}
             </div>
         </div>

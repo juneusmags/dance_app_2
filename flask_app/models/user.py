@@ -127,12 +127,27 @@ class User:
         return (delete_request_two)
 
     @classmethod
+    def deletefriend(cls, data):
+        delete_friend1 = "DELETE FROM friends WHERE friend_id = %(user_id)s AND user_id = %(id)s"
+        connectToMySQL(
+            "dance_schema").query_db(delete_friend1, data)
+        delete_friend2 = "DELETE FROM friends WHERE friend_id = %(id)s AND user_id = %(user_id)s"
+        connectToMySQL(
+            "dance_schema").query_db(delete_friend2, data)
+
+    @classmethod
     def send_request(cls, data):
-        query = "INSERT INTO friend_requests (user_id, friend_id, created_at, updated_at) VALUES (%(user_id)s, %(id)s, NOW(), NOW());"
+        query_validate = "SELECT * from friend_requests WHERE user_id = %(user_id)s AND friend_id = %(id)s;"
+        query_two = connectToMySQL(
+            'dance_schema').query_db(query_validate, data)
+        if len(query_two) == 1:
+            return False
+        else:
+            query = "INSERT INTO friend_requests (user_id, friend_id, created_at, updated_at) VALUES (%(user_id)s, %(id)s, NOW(), NOW());"
 
-        query_one = connectToMySQL('dance_schema').query_db(query, data)
+            query_one = connectToMySQL('dance_schema').query_db(query, data)
 
-        return (query_one)
+            return (query_one)
 
     @classmethod
     def send_one_user(cls, data):

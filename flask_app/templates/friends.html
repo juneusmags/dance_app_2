@@ -139,7 +139,7 @@
                           
                           <div class = "d-flex justify-content-around">
                             <a href="/sendmessagepage/{{one_friend.friend_id}}" class="btn btn-primary">Send Message</a>
-                            <a href="#" class="btn btn-danger">Delete Friend</a>
+                            <a href="/deletefriend/{{one_friend.friend_id}}" class="btn btn-danger">Delete Friend</a>
                         </div>
                         </div>
                       </div>
@@ -156,11 +156,11 @@
                     <div class = "p-3 mt-3">
                         
                     </div>
-                    <hr class = "m-0">
+                    
                     <div lass = "d-flex align-items-center justify-content-between my-3">
                         <p class = "tex-muted fs-5 m-0">Friend Requests</p>
                     </div>
-                    <div>
+                    <hr>
                         {%for one_request in all_requests %}
                             <li class="dropdown-item rounded my-2 px-0" type = "button">
                                 <div class="d-flex align-items-center mx-2">
@@ -180,7 +180,7 @@
                                 </div>
                             </li> 
                         {%endfor%}
-                    </div>
+                    
             </div>
         </div>
 
