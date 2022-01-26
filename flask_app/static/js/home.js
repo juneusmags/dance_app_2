@@ -39,13 +39,3 @@ commentBtn.forEach(bttn =>{
         })
     })
 
-
-// commentBtn.addEventListener("click", ()=>{
-//     commentModalContainer.forEach(modal => {
-//         modal.classList.add('show')
-//     })
-// })
-
-// commentClose.addEventListener("click",()=>{
-//     commentModalContainer.classList.remove('show')
-// })
