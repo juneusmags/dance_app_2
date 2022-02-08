@@ -142,9 +142,9 @@
                                 {%if validate_friend(user.id, one_user.id) == true %}
                                     {% if validate_friend_request(user.id, one_user.id) == true %}
                                         <a href="/sendrequest/{{one_user.id}}" class="btn btn-primary">Send Friend Request</a>
-                                    {%else%}
+                                    {%else %}
                                         <button class = "btn btn-primary" disabled>Friend Request Sent</button>
-                                    {%endif%}
+                                    {%endif %}
                                 {%else%} 
                                     <a href="/deletefriend/{{one_user.id}}" class="btn btn-danger">Delete Friend</a>
                                 {%endif%}
